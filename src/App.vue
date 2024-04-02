@@ -1,5 +1,6 @@
 <template>
   <main class="main-container">
+
     <aside class="side-bar">
       <header class="titulo icon">
         <h1>Calendar</h1>
