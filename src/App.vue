@@ -63,94 +63,55 @@
   </main>
 </template>
 
+<template>
+  <section class="section-app">
+
+    <header>
+
+      <section>
+        <label for="">Brand</label>
+      </section>
+
+      <section>
+        <label for="">Messages</label>
+      </section>
+
+    </header>
+
+    <aside>
+      <nav>
+        <ul>
+          <li>
+            <RouterLink to="/">Report</RouterLink>
+            <RouterLink to="/calendar">Calendar</RouterLink>
+            <RouterLink>My Calendar</RouterLink>
+            <RouterLink>Settings</RouterLink>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <label for="">main</label>
+      <RouterView></RouterView>
+    </main>
+
+    <footer>
+      <p>wanyos@copyright.com</p>
+    </footer>
+  </section>
+</template>
+
 <script setup>
 import { RouterView } from 'vue-router'
 import Icon from './components/icons/Icon.vue'
 import calendar from './assets/img/calendar.svg'
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
-<style scoped>
+<template>
+  <h1>hello app</h1>
+  <RouterView />
+</template>
 
-.side-bar {
-  border: 1px solid black;
-  height: 100vh;
-  overflow: hidden;
-  width: 20%;
-}
-
-.titulo {
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-.icon {
-  margin-left: 5px;
-}
-
-.nav {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.section-nav {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.section-select {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 10px;
-}
-
-.section-select label {
-  font-family: 'Courier New', Courier, monospace;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-select select {
-  width: 80px;
-  padding: 4px;
-  text-align: center;
-}
-
-.section-tipo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.section-tipo label {
-  padding: 10px;
-}
-
-.section-tipo select {
-  width: 80%;
-  text-align: center;
-  padding: 3px;
-  margin-bottom: 40px;
-}
-
-.div-btn {
-  margin-top: 50px;
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.div-btn button {
-  padding: 10px 30px;
-  border-radius: 10%;
-  cursor: pointer;
-}
-
-.div-btn button:hover {
-  background-color: lightskyblue;
-}
-
-</style>
+<style scoped></style>
