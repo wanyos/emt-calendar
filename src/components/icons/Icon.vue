@@ -7,21 +7,15 @@ const props = defineProps({
   svg: {
     type: String,
     required: true
-  },
-  tailwindClass: {
-    type: String,
-    default: 'h-6 w-6'
   }
 })
 </script>
 
 <style scoped>
-
 .icon {
   width: 25px;
   height: 25px;
 }
-
 </style>
 
 <!-- 
