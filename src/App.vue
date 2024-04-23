@@ -1,42 +1,72 @@
 <template>
-  <main class="main-container">
 
-    <aside class="menu-container">
-      <section class="titulo icon">
-        <h1>Calendar</h1>
-        <Icon :svg="calendar" class="icon" />
+  <section class="section-app">
+
+    <header>
+
+      <section>
+        <label for="">Brand</label>
       </section>
-      <Report />
+
+      <section>
+        <label for="">Messages</label>
+      </section>
+
+    </header>
+
+    <aside>
+      <nav>
+        <ul>
+          <li>
+            <router-link to="/">Report</router-link>
+            <router-link to="/calendar">Calendar</router-link>
+            <!-- <router-link>My Calendar</router-link>
+            <router-link>Settings</router-link> -->
+          </li>
+        </ul>
+      </nav>
     </aside>
 
-    <RouterView />
-  </main>
+    <main>
+      <label for="">main</label>
+      <router-view></router-view>
+    </main>
+
+    <footer>
+      <p>wanyos@copyright.com</p>
+    </footer>
+
+  </section>
+
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
-import Icon from './components/icons/Icon.vue'
-import calendar from './assets/img/calendar.svg'
-import Report from './components/Report.vue';
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <style scoped>
 
-.menu-container {
+.section-app {
+  grid-template-columns: 150px auto;
+  grid-template-rows: 50px auto 50px;
+}
+
+header {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
   border: 1px solid black;
-  max-width: 15%;
-  height: 100vh;
 }
 
-.titulo {
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+aside {
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+  border: 1px solid blue;
 }
 
-.icon {
-  margin-left: 5px;
+footer {
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+  border: 1px solid black;
 }
+
 </style>
