@@ -58,8 +58,8 @@
 
 </script>
 
-<style>
-.side-bar {
+<style scoped>
+/* .side-bar {
   border: 1px solid black;
   height: 100vh;
   overflow: hidden;
@@ -128,7 +128,7 @@
 
 .div-btn button:hover {
   background-color: lightskyblue;
-}
+} */
 </style>
 
 

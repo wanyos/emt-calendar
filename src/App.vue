@@ -1,72 +1,119 @@
 <template>
-
   <section class="section-app">
-
-    <header>
-
-      <section>
+    <header class="header">
+      <section class="header__brand">
         <label for="">Brand</label>
       </section>
 
-      <section>
-        <label for="">Messages</label>
+      <section class="header__messages">
+        <p>Messages</p>
       </section>
-
     </header>
 
-    <aside>
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/">Report</router-link>
-            <router-link to="/calendar">Calendar</router-link>
-            <!-- <router-link>My Calendar</router-link>
+    <aside class="aside">
+      <nav class="aside__nav">
+        <ul class="nav--ul">
+          <router-link class="nav--item" to="/">Report</router-link>
+          <router-link class="nav--item" to="/calendar">Calendar</router-link>
+          <li></li>
+           <!-- <router-link>My Calendar</router-link>
             <router-link>Settings</router-link> -->
-          </li>
         </ul>
       </nav>
     </aside>
 
-    <main>
+    <main class="main">
       <label for="">main</label>
       <router-view></router-view>
     </main>
 
-    <footer>
-      <p>wanyos@copyright.com</p>
+    <footer class="footer">
+      <p class="footer--cr">wanyos@copyright.com</p>
     </footer>
-
   </section>
-
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
+
 </script>
 
 <style scoped>
-
 .section-app {
-  grid-template-columns: 150px auto;
-  grid-template-rows: 50px auto 50px;
+  display: grid;
+  grid-template-columns: 16rem auto;
+  grid-template-rows: 4rem auto 4rem;
+  gap: 1rem;
 }
 
-header {
+.header {
   grid-column: 1 / 4;
   grid-row: 1 / 2;
-  border: 1px solid black;
+  display: flex;
 }
 
-aside {
+.header__brand {
+  width: 18rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
+}
+
+.header__messages {
+  width: 100%;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
+}
+
+.aside {
+  height: 90vh;
   grid-column: 1 / 2;
   grid-row: 2 / 4;
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 25px lightgrey;
 }
 
-footer {
-  grid-column: 2 / 4;
-  grid-row: 2 / 3;
+.nav--ul {
+  list-style: none;
+  margin-top: 2em;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav--item {
   border: 1px solid black;
+  width: 90%;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1em;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.nav--item:hover {
+  background-color: aliceblue;
+}
+
+.main {
+  height: 95%;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  box-shadow: 0px 0px 25px lightgrey;
+}
+
+.footer {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
 }
 
 </style>
