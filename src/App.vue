@@ -47,12 +47,14 @@ import { RouterView, RouterLink } from 'vue-router'
 <style scoped>
 
 .section-app {
+  border: 1px solid red;
+  height: 100vh;
   grid-template-columns: 150px auto;
   grid-template-rows: 50px auto 50px;
 }
 
 header {
-  grid-column: 1 / 4;
+  grid-column: 1 / 3;
   grid-row: 1 / 2;
   border: 1px solid black;
 }
@@ -60,6 +62,7 @@ header {
 aside {
   grid-column: 1 / 2;
   grid-row: 2 / 4;
+  height: 100vh;
   border: 1px solid blue;
 }
 
