@@ -1,5 +1,6 @@
 <template>
-  <img :src="props.svg" class=".icon" />
+  <img :src="props.svg" />
+
 </template>
 
 <script setup>

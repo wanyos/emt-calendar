@@ -1,75 +1,119 @@
 <template>
-
   <section class="section-app">
 
-    <header>
-
-      <section>
-        <label for="">Brand</label>
+    <header class="header">
+      <section class="header__brand">
+        <Brand />
       </section>
 
-      <section>
-        <label for="">Messages</label>
+      <section class="header__messages">
+        <p>Messages</p>
       </section>
-
     </header>
 
-    <aside>
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/">Report</router-link>
-            <router-link to="/calendar">Calendar</router-link>
-            <!-- <router-link>My Calendar</router-link>
-            <router-link>Settings</router-link> -->
-          </li>
+    <aside class="aside">
+      <nav class="aside__nav">
+        <ul class="nav--ul">
+          <router-link class="nav--item" to="/">Report</router-link>
+          <router-link class="nav--item" to="/calendar">Calendar</router-link>
+          <router-link class="nav--item" to="/my_calendar">My Calendar</router-link>
+          <router-link class="nav--item" to="/settings">Settings</router-link>
         </ul>
       </nav>
     </aside>
 
-    <main>
-      <label for="">main</label>
+    <main class="main">
       <router-view></router-view>
     </main>
 
-    <footer>
-      <p>wanyos@copyright.com</p>
+    <footer class="footer">
+      <p class="footer--cr">wanyos@copyright.com</p>
     </footer>
-
   </section>
-
 </template>
 
 <script setup>
-import { RouterView, RouterLink } from 'vue-router'
+import Brand from '@/components/Brand.vue'
 </script>
 
 <style scoped>
-
 .section-app {
-  border: 1px solid red;
-  height: 100vh;
-  grid-template-columns: 150px auto;
-  grid-template-rows: 50px auto 50px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 4rem auto 4rem;
+  gap: 1rem;
 }
 
-header {
-  grid-column: 1 / 3;
+.header {
+  grid-column: 1 / 4;
   grid-row: 1 / 2;
-  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: auto;
 }
 
-aside {
+.header__brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
+}
+
+.header__messages {
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
+  padding: 10px;
+}
+
+.aside {
+  height: 90vh;
   grid-column: 1 / 2;
   grid-row: 2 / 4;
-  height: 100vh;
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 25px lightgrey;
 }
 
-footer {
-  grid-column: 2 / 4;
-  grid-row: 2 / 3;
+.nav--ul {
+  list-style: none;
+  margin-top: 2em;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav--item {
   border: 1px solid black;
+  width: 90%;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1em;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.nav--item:hover {
+  background-color: aliceblue;
+}
+
+.main {
+  height: 100%;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  box-shadow: 0px 0px 25px lightgrey;
+  padding: 10px;
+}
+
+.footer {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 25px lightgrey;
 }
 
 </style>
