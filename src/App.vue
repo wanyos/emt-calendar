@@ -1,110 +1,77 @@
 <template>
   <section class="section-app">
-    <header class="header">
-      <section class="header__brand">
-        <label for="">Brand</label>
-      </section>
-
+    <header class="header main__second-color">
       <section class="header__messages">
-        <p>Messages</p>
+        <p>{{ $route.name }}</p>
       </section>
     </header>
 
-    <aside class="aside">
-      <nav class="aside__nav">
-        <ul class="nav--ul">
-          <router-link class="nav--item" to="/">Report</router-link>
-          <router-link class="nav--item" to="/calendar">Calendar</router-link>
-          <li></li>
-           <!-- <router-link>My Calendar</router-link>
-            <router-link>Settings</router-link> -->
-        </ul>
-      </nav>
+    <aside class="aside main__second-color">
+      <section class="aside__brand main__second-color">
+        <Icon :img-url="calendar" />
+      </section>
+
+      <SideBar />
     </aside>
 
     <main class="main">
-      <label for="">main</label>
       <router-view></router-view>
     </main>
 
-    <footer class="footer">
-      <p class="footer--cr">wanyos@copyright.com</p>
+    <footer class="footer main__second-color">
+      <p class="footer-cr">wanyos@copyright.com</p>
     </footer>
   </section>
 </template>
 
 <script setup>
+import Icon from '@/components/icons/Icon.vue'
+import calendar from '@/assets/img/calendar.svg'
+import SideBar from '@/components/menu-sidebar/SideBar.vue'
 
 </script>
 
 <style scoped>
 .section-app {
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 16rem auto;
-  grid-template-rows: 4rem auto 4rem;
-  gap: 1rem;
+  grid-template-rows: 3rem auto 2rem;
+  background-color: #3b4c5d;
 }
 
 .header {
-  grid-column: 1 / 4;
+  grid-column: 2 / 4;
   grid-row: 1 / 2;
   display: flex;
 }
 
-.header__brand {
-  width: 18rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
-}
-
 .header__messages {
-  width: 100%;
-  margin-left: 1rem;
+  border: 2px solid black;
   display: flex;
   align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
 }
 
 .aside {
-  height: 90vh;
+  height: 100%;
   grid-column: 1 / 2;
-  grid-row: 2 / 4;
+  grid-row: 1 / 4;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 25px lightgrey;
+  border-right: 2px solid blue;
 }
 
-.nav--ul {
-  list-style: none;
-  margin-top: 2em;
-  padding: 0;
+.aside__brand {
+  border: 1px solid black;
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.nav--item {
-  border: 1px solid black;
-  width: 90%;
-  padding: 15px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 1em;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-.nav--item:hover {
-  background-color: aliceblue;
-}
-
 .main {
-  height: 95%;
   grid-column: 2 / 4;
   grid-row: 2 / 4;
-  box-shadow: 0px 0px 25px lightgrey;
 }
 
 .footer {
@@ -113,7 +80,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
 }
-
 </style>
