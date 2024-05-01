@@ -20,7 +20,7 @@ const props = defineProps({
 <style lang="css" scoped>
 .nav-ul {
   list-style: none;
-  margin-top: 2em;
+  margin-top: 1em;
   padding: 0;
   display: flex;
   flex-direction: column;

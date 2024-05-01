@@ -37,21 +37,20 @@ const getDataMenu = computed(() => {
 
 <style lang="css" scoped>
 .div__report {
-  padding: 2em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .nav-report {
   width: 90%;
-  text-align: center;
   cursor: pointer;
-  margin-bottom: 1em;
   text-decoration: none;
-  border: none;
   border: 1px solid blue;
   padding: 10px 15px;
   border-radius: 10px;
+  text-align: center;
 }
 
 .nav-report:hover {

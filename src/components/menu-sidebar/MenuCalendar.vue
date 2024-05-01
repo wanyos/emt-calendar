@@ -86,7 +86,7 @@ const submitForm = () => {
 }
 
 .form__div {
-  padding: 1em;
+  padding: 0.5em 2em;
   display: flex;
   flex-direction: column;
 }
