@@ -24,6 +24,10 @@
   }
 }
 
+body {
+  background-color: #ededed;
+}
+
 .main__second-color {
   background-color: #545b61;
 }

@@ -28,12 +28,13 @@
 import Icon from '@/components/icons/Icon.vue'
 import calendar from '@/assets/img/calendar.svg'
 import SideBar from '@/components/menu-sidebar/SideBar.vue'
-
 </script>
 
 <style scoped>
 .section-app {
+  max-width: 1840px;
   min-height: 100vh;
+  margin: auto;
   display: grid;
   grid-template-columns: 16rem auto;
   grid-template-rows: 3rem auto 2rem;
@@ -47,9 +48,9 @@ import SideBar from '@/components/menu-sidebar/SideBar.vue'
 }
 
 .header__messages {
-  border: 2px solid black;
   display: flex;
   align-items: center;
+  margin-left: 1em;
 }
 
 .aside {

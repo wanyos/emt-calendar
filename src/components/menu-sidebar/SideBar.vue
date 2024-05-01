@@ -15,19 +15,12 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const getMenuCalendar = h(MenuCalendar, {
-  typeCalendar: ['conductor', 'inspector', 'gruas'],
-  typeGroup: ['1', '2', '3', '4', '5'],
-  typeSub: ['A', 'B', 'C', 'D'],
-  typeYear: ['2020', '2021', '2022']
-})
-
 const getDataMenu = computed(() => {
   switch (route.name) {
     case 'Report':
       return MainMenu
     case 'Calendar':
-      return getMenuCalendar
+      return MenuCalendar
     case 'MyCalendar':
       return MenuMyCalendar
   }
