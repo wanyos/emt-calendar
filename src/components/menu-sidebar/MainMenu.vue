@@ -1,6 +1,6 @@
 <template>
   <router-link class="nav-item" :to="{ name: 'Calendar' }">Calendar</router-link>
-  <router-link class="nav-item" :to="{ name: 'My calendar' }">My Calendar</router-link>
+  <router-link class="nav-item" :to="{ name: 'My Calendar' }">My Calendar</router-link>
   <router-link class="nav-item" :to="{ name: 'Settings' }">Settings</router-link>
 </template>
 
@@ -20,8 +20,7 @@
 }
 
 .nav-item:hover {
-  background-color: #5d636a;
+  background-color: rgb(0, 0, 0, 0.4);
   border-bottom: 1px solid white;
-  transition: 0.7s;
 }
 </style>

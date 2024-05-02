@@ -2,30 +2,28 @@
   <div class="div__report">
     <router-link class="nav-report" :to="{ name: 'Report' }">Report</router-link>
   </div>
-  <LayoutSideBar :data-menu="getDataMenu"> </LayoutSideBar>
+  <LayoutSideBar :data-menu="getComponents"> </LayoutSideBar>
 </template>
 
 <script setup>
-import { computed, h } from 'vue'
+import { computed } from 'vue'
 import LayoutSideBar from '@/layouts/LayoutSideBar.vue'
 import MainMenu from '@/components/menu-sidebar/MainMenu.vue'
 import MenuCalendar from '@/components/menu-sidebar/MenuCalendar.vue'
 import MenuMyCalendar from '@/components/menu-sidebar/MenuMyCalendar.vue'
+import MenuSettings from './MenuSettings.vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const getDataMenu = computed(() => {
-  switch (route.name) {
-    case 'Report':
-      return MainMenu
-    case 'Calendar':
-      return MenuCalendar
-    case 'MyCalendar':
-      return MenuMyCalendar
-  }
-  return MainMenu
-})
+const objComponents = {
+  'Report': MainMenu,
+  'Calendar': MenuCalendar,
+  'My Calendar': MenuMyCalendar,
+  'Settings': MenuSettings
+}
+
+const getComponents = computed(() => objComponents[route.name])
 </script>
 
 <style lang="css" scoped>
@@ -47,8 +45,7 @@ const getDataMenu = computed(() => {
 }
 
 .nav-report:hover {
-  background-color: #5d636a;
+  background-color: rgb(0, 0, 0, 0.4);
   border-bottom: 1px solid white;
-  transition: 0.7s;
 }
 </style>

@@ -2,8 +2,8 @@
   <form class="form" @submit.prevent="submitForm">
     <div class="form__div">
       <label for="selectType">Type</label>
-      <select v-model="selectTypeCalendar" @change="setTypeGroup">
-        <option v-for="(item, index) in calendar" :key="index" :value="item">
+      <select v-model="selectTypeCalendar">
+        <option v-for="(item, index) in calendar" :key="index">
           {{ item }}
         </option>
       </select>
@@ -11,8 +11,8 @@
 
     <div class="form__div">
       <label for="selectGroup">Group</label>
-      <select v-model="selectGroup" @change="setTypeGroup">
-        <option v-for="(item, index) in group" :key="index" :value="item">
+      <select v-model="selectGroup">
+        <option v-for="(item, index) in group" :key="index">
           {{ item }}
         </option>
       </select>
@@ -21,7 +21,7 @@
     <div v-if="showSubgroup" class="form__div">
       <label for="selectSub">SubGroup</label>
       <select v-model="selectSub" name="selectSub">
-        <option v-for="(item, index) in sub" :key="index" :value="item">
+        <option v-for="(item, index) in sub" :key="index">
           {{ item }}
         </option>
       </select>
@@ -39,7 +39,7 @@
         />
         <label for="radioN" :class="labelClasses('number')">Number</label>
         <select v-model="selectNumber" :disabled="radioSelect === 'letter'">
-          <option v-for="(item, index) in subRefuerzoN" :key="index" :value="item">
+          <option v-for="(item, index) in subRefuerzoN" :key="index">
             {{ item }}
           </option>
         </select>
@@ -49,7 +49,7 @@
         <input id="radioL" v-model="radioSelect" type="radio" name="option" value="letter" />
         <label for="radioL" :class="labelClasses('letter')">Letter</label>
         <select v-model="selectLetter" :disabled="radioSelect === 'number'">
-          <option v-for="(item, index) in subRefuerzoL" :key="index" :value="item">
+          <option v-for="(item, index) in subRefuerzoL" :key="index">
             {{ item }}
           </option>
         </select>
@@ -59,7 +59,7 @@
     <div class="form__div">
       <label for="selectYear">Year</label>
       <select v-model="selectYear" name="selectYear">
-        <option v-for="(item, index) in years" :key="index" :value="item">
+        <option v-for="(item, index) in years" :key="index">
           {{ item }}
         </option>
       </select>
@@ -72,8 +72,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import constants from '@/constants/dataFormCalendar.js'
+import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
+
+const { setOptions } = useOptionsCalendarStore()
 
 const selectTypeCalendar = ref('')
 const selectGroup = ref('')
@@ -144,10 +147,15 @@ const typeCalendarConfig = {
     showRefuerzo: false,
     showSubgroup: true
   },
-  'Grua': { group: constants.groupFive, sub: constants.subC, showRefuerzo: false, showSubgroup: true }
+  'Grua': {
+    group: constants.groupFive,
+    sub: constants.subC,
+    showRefuerzo: false,
+    showSubgroup: true
+  }
 }
 
-const setTypeGroup = () => {
+watch([selectTypeCalendar, selectGroup], ([calendar, grou], [preCalendar, preGroup]) => {
   const config = typeCalendarConfig[selectTypeCalendar.value]
   if (config) {
     group.value = config.group
@@ -155,7 +163,7 @@ const setTypeGroup = () => {
     showRefuerzo.value = config.showRefuerzo
     sub.value = config.sub || null
   }
-}
+})
 
 /**
  * Existen 50 subgrupos, dependiendo de la seleccion del select grupo
@@ -174,10 +182,9 @@ function getArrayGruaDSM(selectValue) {
 }
 
 const submitForm = () => {
-  console.log('valor', selectTypeCalendar)
-  console.log('valor', selectGroup)
-  console.log('valor', selectSub)
-  console.log('valor', selectYear)
+  const options = [selectTypeCalendar, selectGroup, selectSub, selectYear]
+
+  setOptions(options)
 }
 </script>
 
@@ -199,7 +206,12 @@ const submitForm = () => {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  background-color: lightslategrey;
+  background-color: #494545;
+  cursor: pointer;
+}
+
+.form__div select:hover {
+  background-color: #585353;
 }
 
 .form__div button {
@@ -209,9 +221,8 @@ const submitForm = () => {
 }
 
 .form__div button:hover {
-  background-color: #5d636a;
+  background-color: rgb(0, 0, 0, 0.4);
   border-bottom: 1px solid white;
-  transition: 0.7s;
 }
 
 .section__div-radio {

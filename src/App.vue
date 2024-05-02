@@ -1,13 +1,13 @@
 <template>
-  <section class="section-app">
-    <header class="header main__second-color">
+  <section class="section-app main__second-color">
+    <header class="header">
       <section class="header__messages">
         <p>{{ $route.name }}</p>
       </section>
     </header>
 
-    <aside class="aside main__second-color">
-      <section class="aside__brand main__second-color">
+    <aside class="aside">
+      <section class="aside__brand">
         <Icon :img-url="calendar" />
       </section>
 
@@ -18,7 +18,7 @@
       <router-view></router-view>
     </main>
 
-    <footer class="footer main__second-color">
+    <footer class="footer">
       <p class="footer-cr">wanyos@copyright.com</p>
     </footer>
   </section>
@@ -32,13 +32,12 @@ import SideBar from '@/components/menu-sidebar/SideBar.vue'
 
 <style scoped>
 .section-app {
-  max-width: 1840px;
+  max-width: 1940px;
   min-height: 100vh;
   margin: auto;
   display: grid;
   grid-template-columns: 16rem auto;
   grid-template-rows: 3rem auto 2rem;
-  background-color: #3b4c5d;
 }
 
 .header {
@@ -72,7 +71,8 @@ import SideBar from '@/components/menu-sidebar/SideBar.vue'
 
 .main {
   grid-column: 2 / 4;
-  grid-row: 2 / 4;
+  grid-row: 2 / 3;
+  background-color: rgb(0, 0, 0);
 }
 
 .footer {

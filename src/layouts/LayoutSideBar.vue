@@ -12,7 +12,7 @@
 const props = defineProps({
   dataMenu: {
     type: Object,
-    required: true
+    default: null
   }
 })
 </script>
@@ -25,22 +25,5 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.nav-item {
-  border: 1px solid black;
-  width: 90%;
-  padding: 5px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 1em;
-  text-decoration: none;
-  border: none;
-}
-
-.nav-item:hover {
-  background-color: #5d636a;
-  border-bottom: 1px solid white;
-  transition: 0.7s;
 }
 </style>
