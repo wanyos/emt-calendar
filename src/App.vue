@@ -1,25 +1,17 @@
 <template>
-  <section class="section-app">
-
+  <section class="section-app main__second-color">
     <header class="header">
-      <section class="header__brand">
-        <Brand />
-      </section>
-
       <section class="header__messages">
-        <p>Messages</p>
+        <p>{{ $route.name }}</p>
       </section>
     </header>
 
     <aside class="aside">
-      <nav class="aside__nav">
-        <ul class="nav--ul">
-          <router-link class="nav--item" to="/">Report</router-link>
-          <router-link class="nav--item" to="/calendar">Calendar</router-link>
-          <router-link class="nav--item" to="/my_calendar">My Calendar</router-link>
-          <router-link class="nav--item" to="/settings">Settings</router-link>
-        </ul>
-      </nav>
+      <section class="aside__brand">
+        <Icon :img-url="calendar" />
+      </section>
+
+      <SideBar />
     </aside>
 
     <main class="main">
@@ -27,84 +19,62 @@
     </main>
 
     <footer class="footer">
-      <p class="footer--cr">wanyos@copyright.com</p>
+      <p class="footer-cr">wanyos@copyright.com</p>
     </footer>
   </section>
 </template>
 
 <script setup>
-import Brand from '@/components/Brand.vue'
+import Icon from '@/components/icons/Icon.vue'
+import calendar from '@/assets/img/calendar.svg'
+import SideBar from '@/components/menu-sidebar/SideBar.vue'
 </script>
 
 <style scoped>
 .section-app {
+  max-width: 1940px;
+  min-height: 100vh;
+  margin: auto;
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: 4rem auto 4rem;
-  gap: 1rem;
+  grid-template-columns: 16rem auto;
+  grid-template-rows: 3rem auto 2rem;
 }
 
 .header {
-  grid-column: 1 / 4;
+  grid-column: 2 / 4;
   grid-row: 1 / 2;
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: auto;
 }
 
-.header__brand {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
-}
-
 .header__messages {
   display: flex;
   align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
-  padding: 10px;
+  margin-left: 1em;
 }
 
 .aside {
-  height: 90vh;
+  height: 100%;
   grid-column: 1 / 2;
-  grid-row: 2 / 4;
+  grid-row: 1 / 4;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 25px lightgrey;
+  border-right: 2px solid blue;
 }
 
-.nav--ul {
-  list-style: none;
-  margin-top: 2em;
-  padding: 0;
+.aside__brand {
+  border: 1px solid black;
+  padding: 1rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.nav--item {
-  border: 1px solid black;
-  width: 90%;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 1em;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-.nav--item:hover {
-  background-color: aliceblue;
-}
-
 .main {
-  height: 100%;
   grid-column: 2 / 4;
-  grid-row: 2 / 4;
-  box-shadow: 0px 0px 25px lightgrey;
-  padding: 10px;
+  grid-row: 2 / 3;
+  background-color: rgb(0, 0, 0);
 }
 
 .footer {
@@ -113,7 +83,5 @@ import Brand from '@/components/Brand.vue'
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 25px lightgrey;
 }
-
 </style>

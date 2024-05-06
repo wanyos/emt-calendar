@@ -1,13 +1,9 @@
 <template>
-    <section>
-       <h1>My Calendar</h1>
-    </section>
- </template>
- 
- <script setup>
- 
- </script>
- 
- <style lang="css" scoped>
- 
- </style>
+  <div>
+    <p>my calendar</p>
+  </div>
+</template>
+
+<script setup></script>
+
+<style lang="css" scoped></style>

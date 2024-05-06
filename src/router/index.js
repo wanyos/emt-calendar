@@ -9,24 +9,32 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'report',
+      name: 'Report',
       component: ReportView
     },
     {
       path: '/calendar',
-      name: 'calendar',
+      name: 'Calendar',
       component: CalendarView
     },
     {
-      path: '/my_calendar',
-      name: 'my_calendar',
+      path: '/my-calendar',
+      name: 'My Calendar',
       component: MyCalendarView
-    }, {
+    },
+    {
       path: '/settings',
-      name: 'settings',
+      name: 'Settings',
       component: SettingsView
     }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   const { setNamePage } = useCurrentPagesStore()
+//   const name = to.name
+//   setNamePage(name)
+//   next()
+// })
 
 export default router

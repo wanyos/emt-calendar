@@ -1,15 +1,20 @@
 <template>
-   <section>
-      <h1>Calendar</h1>
-
-      
-   </section>
+  <section class="section__calendar">
+    <Month name="January" />
+  </section>
 </template>
 
 <script setup>
-
+import Month from '@/components/Month.vue'
+import Day from '@/components/Day.vue'
 </script>
 
-<style lang="css" scoped>
-
+<style scoped lang="css">
+.section__calendar {
+  border: 2px solid white;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+}
 </style>
