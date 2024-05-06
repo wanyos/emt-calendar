@@ -1,18 +1,9 @@
-
-
-
-
-
-
-
 // const getDisabledLabel = computed(() => {
 //   return {
 //     number: radioSelect.value === 'number' ? '' : 'form__disabled-label',
 //     letter: radioSelect.value === 'letter' ? '' : 'form__disabled-label'
 //   }
 // })
-
-
 
 // const setTypeGroup = () => {
 //   if (selectTypeCalendar.value === 'Conductor' || selectTypeCalendar.value === 'Conductor-Buho') {
@@ -63,7 +54,6 @@
 //     sub.value = constants.subC
 //   }
 // }
-
 
 // const setTypeSub = () => {
 //   if (selectTypeCalendar.value === 'Conductor' || selectTypeCalendar.value === 'Buho') {

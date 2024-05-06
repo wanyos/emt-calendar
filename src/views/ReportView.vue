@@ -1,13 +1,9 @@
 <template>
-   <section>
+  <section>
     <h1>Report</h1>
-   </section>
+  </section>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style lang="css" scoped>
-
-</style>
+<style lang="css" scoped></style>

@@ -22,7 +22,7 @@ function getNameMonth(numberMonth) {
   return fecha.toLocaleString('en-US', { month: 'long' })
 }
 
-const getCalendar = (year) => {
+export const getCalendar = (year) => {
   const calendar = {}
   let nameMonth = ''
   for (let a = 0; a < 12; a++) {

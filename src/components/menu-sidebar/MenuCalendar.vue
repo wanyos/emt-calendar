@@ -66,7 +66,7 @@
     </div>
 
     <div class="form__div">
-      <button type="submit">Search</button>
+      <button type="submit" class="form__submit">Search</button>
     </div>
   </form>
 </template>
@@ -182,8 +182,7 @@ function getArrayGruaDSM(selectValue) {
 }
 
 const submitForm = () => {
-  const options = [selectTypeCalendar, selectGroup, selectSub, selectYear]
-
+  const options = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value]
   setOptions(options)
 }
 </script>
@@ -242,5 +241,16 @@ const submitForm = () => {
 
 .form__disabled-label {
   color: gray;
+}
+
+.form__submit {
+  cursor: pointer;
+  width: 90%;
+  background-color: transparent;
+}
+
+.form__submit:hover {
+  background-color: rgb(0, 0, 0, 0.4);
+  border-bottom: 1px solid white;
 }
 </style>

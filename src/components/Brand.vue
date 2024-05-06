@@ -7,9 +7,7 @@
 
 <script setup>
 import Icon from '@/components/icons/Icon.vue'
-import { checkCircle, calendar } from '@/assets/img/iconsSvg.js'
-
-
+import { calendar } from '@/assets/img/iconsSvg.js'
 </script>
 
 <style lang="css" scoped></style>
