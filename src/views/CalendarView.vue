@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import Month from '@/components/Month.vue'
-import Day from '@/components/Day.vue'
+import Month from '@/components/calendar/Month.vue'
+// import Day from '@/components/calendar/Day.vue'
 </script>
 
 <style scoped lang="css">

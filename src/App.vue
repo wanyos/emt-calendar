@@ -1,9 +1,10 @@
 <template>
   <section class="section-app main__second-color">
     <header class="header">
-      <section class="header__messages">
+      <div class="header__div-messages">
         <p>{{ $route.name }}</p>
-      </section>
+      </div>
+      <Login />
     </header>
 
     <aside class="aside">
@@ -16,6 +17,7 @@
 
     <main class="main">
       <router-view></router-view>
+      <Modal v-if="console.log('app', showModal)" />
     </main>
 
     <footer class="footer">
@@ -28,6 +30,11 @@
 import Icon from '@/components/icons/Icon.vue'
 import calendar from '@/assets/img/calendar.svg'
 import SideBar from '@/components/menu-sidebar/SideBar.vue'
+import Login from '@/components/login/Login.vue'
+import Modal from '@/components/modals/Modal.vue'
+import { useModal } from './stores/modalStore.js'
+
+const { showModal } = useModal()
 </script>
 
 <style scoped>
@@ -44,11 +51,11 @@ import SideBar from '@/components/menu-sidebar/SideBar.vue'
   grid-column: 2 / 4;
   grid-row: 1 / 2;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header__messages {
-  display: flex;
-  align-items: center;
+.header__div-messages {
   margin-left: 1em;
 }
 
