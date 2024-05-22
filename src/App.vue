@@ -17,7 +17,7 @@
 
     <main class="main">
       <router-view></router-view>
-      <Modal v-if="console.log('app', showModal)" />
+      <Modal v-if="modalStore.showModal" class="modal" />
     </main>
 
     <footer class="footer">
@@ -34,7 +34,7 @@ import Login from '@/components/login/Login.vue'
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from './stores/modalStore.js'
 
-const { showModal } = useModal()
+const modalStore = useModal()
 </script>
 
 <style scoped>
@@ -88,5 +88,15 @@ const { showModal } = useModal()
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal {
+  position: absolute;
+  width: 150px;
+  height: 250px;
+  border: 2px solid red;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 9999;
 }
 </style>

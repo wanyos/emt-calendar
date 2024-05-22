@@ -1,6 +1,6 @@
 <template>
   <div class="header__div-login">
-    <Button text="LogIn" :is-disabled="!isLogin" @click="setLogin" />
+    <Button text="LogIn" :is-disabled="!isLogin" @click="toggleModal" />
     <Button text="LogOut" :is-disabled="isLogin" @click="deleteUserInfo" />
   </div>
 </template>
@@ -16,9 +16,7 @@ const { toggleModal } = useModal()
 
 const isLogin = computed(() => user.id !== undefined)
 
-const setLogin = () => {
-  toggleModal()
-}
+
 </script>
 
 <style lang="css" scoped>
