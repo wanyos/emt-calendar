@@ -1,6 +1,6 @@
 <template>
   <div class="header__div-login">
-    <Button text="LogIn" :is-disabled="!isLogin" @click="toggleModal" />
+    <Button text="LogIn" :is-disabled="!isLogin" @click="showModalLogin" />
     <Button text="LogOut" :is-disabled="isLogin" @click="deleteUserInfo" />
   </div>
 </template>
@@ -12,7 +12,7 @@ import { useModal } from '@/stores/modalStore'
 import { computed } from 'vue'
 
 const { user, deleteUserInfo } = useUserInfo()
-const { toggleModal } = useModal()
+const { showModalLogin } = useModal()
 
 const isLogin = computed(() => user.id !== undefined)
 

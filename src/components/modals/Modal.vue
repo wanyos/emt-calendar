@@ -1,24 +1,18 @@
 <template>
-  <section class="section__modal">
-    <div class="section__div-modal">
-      <slot></slot>
-    </div>
+  <section v-if="modalStore.showModal" class="section__modal">
+    <slot></slot>
   </section>
 </template>
-
 <script setup>
+import { useModal } from '@/stores/modalStore.js'
 
+const modalStore = useModal()
 </script>
 
 <style lang="css" scoped>
-.modal__section {
-  
-}
-
-.section__div-modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+.section__modal {
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 </style>
