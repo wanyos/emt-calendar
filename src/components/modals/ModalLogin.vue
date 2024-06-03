@@ -8,21 +8,20 @@
           <label>LOGIN</label>
           <button @click="closeModal">X</button>
         </section>
-       
 
           <section class="section__form">
             <form action="" class="form">
               <div class="form__div">
-                <label for="user">User</label>
-                <input type="text" name="user" />
+                <label for="user">Email</label>
+                <input type="email" name="user" v-model="email" />
               </div>
 
               <div class="form__div">
                 <label for="password">Password</label>
-                <input type="password" name="password" />
+                <input type="password" name="password" v-model="password" />
               </div>
 
-              <button>Sent</button>
+              <button @click.prevent="setLogin">Sent</button>
             </form>
           </section>
 
@@ -35,8 +34,20 @@
 <script setup>
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore';
+import { setNewUser } from '@/stores/userInfoStore'
+import { ref } from 'vue'
+
 
 const { closeModal } = useModal()
+
+const email = ref('')
+const password = ref('')
+const auth = getAuth();
+
+const setLogin = () => {
+ setNewUser(email, password) 
+}
+
 </script>
 
 <style lang="css" scoped>
@@ -94,7 +105,7 @@ const { closeModal } = useModal()
 
 .form__div input {
   margin-bottom: 1rem;
-  padding: 0.2rem;
+  padding: 0.3rem;
   border-radius: 5px;
   border: none;
   background-color: #333333;

@@ -1,7 +1,7 @@
 <template>
   <div class="header__div-login">
-    <Button text="LogIn" :is-disabled="!isLogin" @click="showModalLogin" />
-    <Button text="LogOut" :is-disabled="isLogin" @click="deleteUserInfo" />
+    <Button text="LogIn" :is-disabled="isLogin" @click.prevent="showModalLogin" />
+    <Button text="LogOut" :is-disabled="!isLogin" @click.prevent="deleteUserInfo" />
   </div>
 </template>
 

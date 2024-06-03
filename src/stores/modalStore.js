@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import ModalLogin from '@/components/modals/ModalLogin.vue'
 
 export const useModal = defineStore('useModal', () => {

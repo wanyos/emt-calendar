@@ -9,7 +9,7 @@
 
     <aside class="aside">
       <section class="aside__brand">
-        <Icon :img-url="calendar" />
+        <Icon :img-url="report" />
       </section>
 
       <SideBar />
@@ -32,6 +32,7 @@
 <script setup>
 import Icon from '@/components/icons/Icon.vue'
 import calendar from '@/assets/img/calendar.svg'
+import report from '@/assets/img/report.svg'
 import SideBar from '@/components/menu-sidebar/SideBar.vue'
 import Login from '@/components/login/Login.vue'
 import Modal from '@/components/modals/Modal.vue'
