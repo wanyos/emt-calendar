@@ -1,7 +1,8 @@
 <template>
   <div class="header__div-login">
-    <Button text="LogIn" :is-disabled="isLogin" @click.prevent="showModalLogin" />
-    <Button text="LogOut" :is-disabled="!isLogin" @click.prevent="deleteUserInfo" />
+    <Button v-if="!isLogin" class="button" text="SignUp" @click.prevent="showModalLogin(true)" />
+    <Button v-if="!isLogin" class="button" text="SignIn" @click.prevent="showModalLogin(false)" />
+    <Button v-if="isLogin" class="button" text="LogOut" @click.prevent="deleteUserInfo" />
   </div>
 </template>
 
@@ -9,21 +10,21 @@
 import Button from '@/components/global-components/Button.vue'
 import { useUserInfo } from '@/stores/userInfoStore'
 import { useModal } from '@/stores/modalStore'
-import { computed } from 'vue'
 
-const { user, deleteUserInfo } = useUserInfo()
+const { isLogin, deleteUserInfo } = useUserInfo()
 const { showModalLogin } = useModal()
 
-const isLogin = computed(() => user.id !== undefined)
-
+console.log('login', isLogin)
 
 </script>
 
 <style lang="css" scoped>
 .header__div-login {
-  width: 11rem;
   display: flex;
-  justify-content: space-between;
-  margin-right: 1rem;
+}
+
+.button {
+  margin-right: 10px;
+  padding: 0;
 }
 </style>

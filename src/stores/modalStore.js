@@ -1,18 +1,22 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, shallowRef, h } from 'vue'
 import ModalLogin from '@/components/modals/ModalLogin.vue'
 
 export const useModal = defineStore('useModal', () => {
   const showModal = ref(false)
-  const modalComponent = ref()  
+  let modalComponent = shallowRef()
 
   const closeModal = () => {
     showModal.value = false
   }
 
-  const showModalLogin = () => {
+  const showModalLogin = (signup) => {
+    let titleModal = signup ? 'SignUp' : 'SignIn'
+    const modal = h(ModalLogin, {
+      title: titleModal
+    })
     showModal.value = true
-    modalComponent.value = ModalLogin
+    modalComponent.value = modal
   }
 
   return { showModal, modalComponent, showModalLogin, closeModal }

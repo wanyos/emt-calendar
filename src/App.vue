@@ -53,6 +53,7 @@ const modalStore = useModal()
 }
 
 .header {
+  position: relative;
   grid-column: 2 / 4;
   grid-row: 1 / 2;
   display: flex;

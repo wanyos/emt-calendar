@@ -5,7 +5,7 @@
         <div class="section__modal-div">
 
         <section class="section__header">
-          <label>LOGIN</label>
+          <label>{{ props.title }}</label>
           <button @click="closeModal">X</button>
         </section>
 
@@ -21,7 +21,7 @@
                 <input type="password" name="password" v-model="password" />
               </div>
 
-              <button @click.prevent="setLogin">Sent</button>
+              <button @click.prevent="login">Sent</button>
             </form>
           </section>
 
@@ -33,19 +33,26 @@
 
 <script setup>
 import Modal from '@/components/modals/Modal.vue'
-import { useModal } from '@/stores/modalStore';
-import { setNewUser } from '@/stores/userInfoStore'
+import { useModal } from '@/stores/modalStore'
+import { useUserInfo } from '@/stores/userInfoStore'
 import { ref } from 'vue'
 
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  }
+})
 
 const { closeModal } = useModal()
+const { setNewUser, setLogin } = useUserInfo()
 
 const email = ref('')
 const password = ref('')
-const auth = getAuth();
 
-const setLogin = () => {
- setNewUser(email, password) 
+const login = () => {
+  props.title === 'SignUp' ?  setNewUser(email, password) : setLogin(email, password)
+ closeModal()
 }
 
 </script>
