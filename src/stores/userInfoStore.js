@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive, ref, computed } from 'vue'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export const useUserInfo = defineStore('useUserInfo', () => {
   const email = ref('')
@@ -12,10 +12,10 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
   const isLogin = computed(() => user.id !== undefined && user.name !== undefined )
 
-  const setNewUser = (email, password) => {
+  const setSignUp = (email, password) => {
     const auth = getAuth()
+   
     createUserWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
-      console.log('firebase', userCredential)
       const user = userCredential.user
       console.log('user', user)
     }).catch((error) => {
@@ -23,21 +23,24 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     })
   }
 
-  const setLogin = (email, password) => {
+  const setSignIn = (email, password) => {
     const auth = getAuth()
     signInWithEmailAndPassword(auth, email.value, password.value).then((userCredential) => {
       const usr = userCredential.user
-      // console.log('credential', userCredential.user)
-      // console.log('user', usr)
-      // console.log('uid', usr.uid)
-
       user.id = usr.uid
       user.name = usr.email
-      console.log(user.id)
-      console.log(user.name)
-
     }).catch((error) => {
       console.log('error', error)
+    })
+  }
+
+  const setSignOut = () => {
+    const auth = getAuth()
+    signOut(auth).then(() => {
+      user.id = undefined
+       user.name = undefined
+    }).catch((err) => {
+      console.log(err)
     })
   }
 
@@ -46,11 +49,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     user.name = name
   }
 
-  const deleteUserInfo = () => {
-    user.id = undefined
-    user.name = undefined
-    console.log('delete', user.id)
-  }
+  
 
-  return { user, setUserInfo, deleteUserInfo, setNewUser, setLogin, isLogin }
+  return { user, setUserInfo, setSignOut, setSignUp, setSignIn, isLogin }
 })

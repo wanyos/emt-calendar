@@ -45,13 +45,13 @@ const props = defineProps({
 })
 
 const { closeModal } = useModal()
-const { setNewUser, setLogin } = useUserInfo()
+const { setSignUp, setSignIn } = useUserInfo()
 
 const email = ref('')
 const password = ref('')
 
 const login = () => {
-  props.title === 'SignUp' ?  setNewUser(email, password) : setLogin(email, password)
+  props.title === 'SignUp' ?  setSignUp(email, password) : setSignIn(email, password)
  closeModal()
 }
 
