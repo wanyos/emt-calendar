@@ -21,7 +21,11 @@
                 <input type="password" name="password" v-model="password" />
               </div>
 
-              <button @click.prevent="login">Sent</button>
+              <div class="div__button">
+                <button @click.prevent="login">Sent</button>
+                <button @click.prevent="loginGoogle"> <img class="icon" src="@/assets/img/icon-google.webp" /> </button>
+              </div>
+             
             </form>
           </section>
 
@@ -45,7 +49,7 @@ const props = defineProps({
 })
 
 const { closeModal } = useModal()
-const { setSignUp, setSignIn } = useUserInfo()
+const { setSignUp, setSignIn, setSignInGoogle } = useUserInfo()
 
 const email = ref('')
 const password = ref('')
@@ -53,6 +57,10 @@ const password = ref('')
 const login = () => {
   props.title === 'SignUp' ?  setSignUp(email, password) : setSignIn(email, password)
  closeModal()
+}
+const loginGoogle = () => {
+  setSignInGoogle()
+  closeModal()
 }
 
 </script>
@@ -132,5 +140,21 @@ const login = () => {
   background-color: #333333;
 }
 
+.div__button {
+  display: flex;
+  flex-direction: column;
+}
+
+.div__button button {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 25px;
+  margin-right: 10px;
+}
 
 </style>
