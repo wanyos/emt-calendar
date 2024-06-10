@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { reactive, ref, computed } from 'vue'
 import { auth, createUserWithEmailAndPassword ,GoogleAuthProvider, signInWithEmailAndPassword, signOut, signInWithPopup } from '@/firebase/firebaseConfig'
 import router from '@/router/index.js'
+import User from '@/models/user'
 
 import {
   signInWithRedirect,
@@ -12,13 +13,8 @@ import {
 import { addDocument, getUserData, getDocuments } from '@/firebase/firestoreService'
 
 export const useUserInfo = defineStore('useUserInfo', () => {
-  const email = ref('')
-  const password = ref('')
-  const user = reactive({
-    id: undefined,
-    name: undefined,
-    email: undefined
-  })
+  
+  const user = reactive(new User());
 
   const isLogin = computed(() => user.id !== undefined && user.name !== undefined)
 
@@ -31,6 +27,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
         // new user
         addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
+
       })
       .catch((error) => {
         console.log('error', error)
@@ -75,10 +72,15 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       user.name = result.user.displayName
       user.email = result.user.email
     })
-      // get user
-      //  getUserData(user.id)
-      //  .then((data) => console.log('data firestore', data) )
-      //  .catch(() => consoel.log('no search...'))
+       getUserData(user.id)
+       .then((data) => {
+        if(data === null){
+          addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
+        } else {
+          console.log('data',data)
+        }
+       })
+       .catch(() => console.log('no search...'))
   }
 
 

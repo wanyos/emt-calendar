@@ -2,7 +2,7 @@
 import { db } from '@/firebase/firebaseConfig';
 import { collection, addDoc, setDoc, getDocs, getDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 
-// Método para agregar un documento a una colección
+
 export const addDocument = async (uid, userData) => {
   try {
     const userDocRef = doc(db, 'users', uid);
@@ -25,7 +25,7 @@ export const addDocument = async (uid, userData) => {
 // };
 
 
-// Método para obtener todos los documentos de una colección
+
 export const getDocuments = async (collectionName) => {
   try {
     const querySnapshot = await getDocs(collection(db, collectionName));
@@ -52,7 +52,7 @@ export const getUserData = async (uid) => {
     }
   };
 
-// Método para actualizar un documento por ID
+
 export const updateDocument = async (collectionName, docId, data) => {
   try {
     const docRef = doc(db, collectionName, docId);
@@ -63,7 +63,7 @@ export const updateDocument = async (collectionName, docId, data) => {
   }
 };
 
-// Método para eliminar un documento por ID
+
 export const deleteDocument = async (collectionName, docId) => {
   try {
     const docRef = doc(db, collectionName, docId);
