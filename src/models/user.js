@@ -2,6 +2,7 @@ export default class User {
 
     constructor(){}
 
+    /*
     constructor(id, name, middleName, lastName, email){
         this.id = id
         this.name = name
@@ -9,6 +10,7 @@ export default class User {
         this.lastName = lastName
         this.email = email
     }
+        */
 
     setUser(id, name, middleName, lastName, email){
         this.id = id

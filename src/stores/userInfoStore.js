@@ -14,6 +14,7 @@ import { addDocument, getUserData, getDocuments } from '@/firebase/firestoreServ
 
 export const useUserInfo = defineStore('useUserInfo', () => {
   
+  
   const user = reactive(new User());
 
   const isLogin = computed(() => user.id !== undefined && user.name !== undefined)
@@ -65,6 +66,9 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
   const setSignInGoogle = async () => {
     const provider = new GoogleAuthProvider()
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    })
     await signInWithPopup(auth, provider).then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
