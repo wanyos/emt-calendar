@@ -17,7 +17,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
   
   const user = reactive(new User());
 
-  const isLogin = computed(() => user.id !== undefined && user.name !== undefined)
+  const isLogin = computed(() => user.id !== undefined && user.email !== undefined)
 
   const setSignUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email.value, password.value)
@@ -40,11 +40,11 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       .then((userCredential) => {
         const usr = userCredential.user
         user.id = usr.uid
-        user.name = usr.email
+        user.email = usr.email
 
         // get user
         getUserData(user.id)
-        .then((data) =>   console.log('data firestore', data) )
+        .then((data) => console.log('data firestore', data) )
         .catch(() => consoel.log('no search...'))
 
       })
@@ -73,18 +73,23 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       user.id = result.user.uid
-      user.name = result.user.displayName
       user.email = result.user.email
+
+      getUserData(user.id)
+      .then((data) => {
+       if(data === null){
+         addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
+       } else {
+         console.log('data',data)
+         console.log('id', user.id)
+       }
+      })
+      .catch((err) => {
+       consoel.log('err', err)
+      })
+
     })
-       getUserData(user.id)
-       .then((data) => {
-        if(data === null){
-          addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
-        } else {
-          console.log('data',data)
-        }
-       })
-       .catch(() => console.log('no search...'))
+
   }
 
 
