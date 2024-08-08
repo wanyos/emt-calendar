@@ -1,6 +1,9 @@
 <template>
   <div class="div__report">
-    <router-link class="nav-report" :to="{ name: 'Report' }">Report</router-link>
+    <router-link class="nav-report" :to="{ name: 'Report' }">
+      <Icon :img-url="report" class="mr-5" />
+      Report
+    </router-link>
   </div>
   <LayoutSideBar :data-menu="getComponents"> </LayoutSideBar>
 </template>
@@ -13,6 +16,8 @@ import MenuCalendar from '@/components/menu-sidebar/MenuCalendar.vue'
 import MenuMyCalendar from '@/components/menu-sidebar/MenuMyCalendar.vue'
 import MenuSettings from './MenuSettings.vue'
 import { useRoute } from 'vue-router'
+import Icon from '@/components/icons/Icon.vue'
+import report from '@/assets/img/report.svg'
 
 const route = useRoute()
 
@@ -42,6 +47,8 @@ const getComponents = computed(() => objComponents[route.name])
   padding: 10px 15px;
   border-radius: 10px;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .nav-report:hover {

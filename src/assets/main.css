@@ -24,8 +24,13 @@
   }
 }
 
+.heroicon {
+  @apply bg-white;
+}
+
 body {
   background-color: #787070;
+  position: relative;
 }
 
 .main__second-color {

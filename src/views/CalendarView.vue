@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import Month from '@/components/Month.vue'
+// import Month from '@/components/Month.vue'
 // import { getCalendar } from '@/calendars/createCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { nextTick, watch, computed } from 'vue'
