@@ -26,9 +26,7 @@
         <div class="section__body-days">7</div>
         <div class="section__body-days">8</div>
         <div class="section__body-days">9</div>
-        <div class="section__body-days">10</div>
-        <div class="section__body-days">11</div>
-        <div class="section__body-days">12</div>
+
       </ul>
     </section>
   </section>

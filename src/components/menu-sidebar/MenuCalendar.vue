@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+import Button from '@/components/global-components/Button.vue'
 import { ref, onMounted, computed, watch } from 'vue'
 import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'

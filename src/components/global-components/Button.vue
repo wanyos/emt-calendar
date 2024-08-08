@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button :disabled="props.isDisabled" class="button" :class="{ 'button': props.isDisabled }">
+    <button class="button">
       {{ props.text }}
     </button>
   </div>
@@ -19,13 +19,14 @@ const props = defineProps({
 })
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .button {
   cursor: pointer;
   border: 1px solid blue;
   padding: 10px 15px;
   border-radius: 10px;
   text-align: center;
+  background-color: transparent;
 }
 
 .button:hover {

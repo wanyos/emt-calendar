@@ -1,13 +1,14 @@
 <template>
   <section class="section__calendar">
-    <Month name="January" />
-    <label for="">{{ options }}</label>
+
+    <Month v-for="(item, index) in months" :key="index" :name=item />
+   
   </section>
 </template>
 
 <script setup>
-// import Month from '@/components/Month.vue'
-// import { getCalendar } from '@/calendars/createCalendar.js'
+import Month from '@/components/calendar/Month.vue'
+import { getCalendar } from '@/calendars/createCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { nextTick, watch, computed } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -15,8 +16,12 @@ import { storeToRefs } from 'pinia'
 
 const store = useOptionsCalendarStore()
 const { options } = storeToRefs(store)
+const months = ["Jannuary", "February", "March", "April"]
 
 const opt = computed(() => options)
+
+const cl = getCalendar(2024);
+console.log('year', cl);
 
 watch(options, (newValue, oldValue) => {
   console.log('options', options.value)
@@ -25,10 +30,11 @@ watch(options, (newValue, oldValue) => {
 
 <style scoped lang="css">
 .section__calendar {
-  border: 2px solid white;
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 10px;
+  margin: 20px;
 }
 </style>

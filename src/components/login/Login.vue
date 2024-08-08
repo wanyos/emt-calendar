@@ -20,6 +20,9 @@ const { showModalLogin } = useModal()
 <style lang="css" scoped>
 .header__div-login {
   display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 15px;
 }
 
 .button {

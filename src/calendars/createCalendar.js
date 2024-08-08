@@ -29,8 +29,11 @@ export const getCalendar = (year) => {
     const days = []
     let day = 1
     nameMonth = getNameMonth(a)
+    console.log('month', nameMonth)
     const initDay = getDayInitMonth(a, year)
+    console.log('iniDAy', initDay)
     const totalDays = getMonthDays(a, year)
+    console.log('total', totalDays)
 
     for (let d = 0; d < totalDays + initDay; d++) {
       if (d < initDay) {
@@ -41,4 +44,5 @@ export const getCalendar = (year) => {
     }
     calendar[nameMonth] = days
   }
+  return calendar;
 }

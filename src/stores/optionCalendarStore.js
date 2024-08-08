@@ -6,7 +6,6 @@ export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
 
   const setOptions = (opt) => {
     options.value = opt
-    console.log('update', options.value)
   }
 
   return { setOptions, options }
