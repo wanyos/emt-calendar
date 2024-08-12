@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>my calendar</p>
+  
   </div>
 </template>
 

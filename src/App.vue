@@ -1,5 +1,5 @@
 <template>
-  <section class="section-app main__second-color">
+  <section class="section-app">
     <header class="header">
       <div class="header__div-messages">
         <p>{{ $route.name }}</p>
@@ -53,12 +53,10 @@ const modalStore = useModal()
 }
 
 .header {
-  position: relative;
-  grid-column: 2 / 4;
-  grid-row: 1 / 2;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: auto;
+ grid-column: 2 / 4;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
 }
 
 .header__messages {
@@ -77,7 +75,7 @@ const modalStore = useModal()
   grid-row: 1 / 4;
   display: flex;
   flex-direction: column;
-  border-right: 2px solid blue;
+  border-right: 2px solid rgb(88, 201, 224);
 }
 
 .aside__brand {
@@ -86,12 +84,12 @@ const modalStore = useModal()
   display: flex;
   justify-content: center;
   align-items: center;
+  background: none;
 }
 
 .main {
   grid-column: 2 / 4;
   grid-row: 2 / 3;
-  background-color: rgb(0, 0, 0);
 }
 
 .footer {

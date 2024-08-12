@@ -1,11 +1,9 @@
 <template>
   <div class="div__report">
-    <router-link class="nav-report" :to="{ name: 'Report' }">
-      <Icon :img-url="report" class="mr-5" />
-      Report
-    </router-link>
+      <Button type="router-link" :to="{ name: 'Report' }" text="Report" customClass="px-12 py-2" />
+      <!-- <Icon :img-url="report" class="mr-5" /> -->
   </div>
-  <LayoutSideBar :data-menu="getComponents"> </LayoutSideBar>
+  <LayoutSideBar :data-menu="getComponents" class="layout__side-bar"> </LayoutSideBar>
 </template>
 
 <script setup>
@@ -16,6 +14,7 @@ import MenuCalendar from '@/components/menu-sidebar/MenuCalendar.vue'
 import MenuMyCalendar from '@/components/menu-sidebar/MenuMyCalendar.vue'
 import MenuSettings from './MenuSettings.vue'
 import { useRoute } from 'vue-router'
+import Button from '@/components/global-components/Button.vue';
 import Icon from '@/components/icons/Icon.vue'
 import report from '@/assets/img/report.svg'
 
@@ -37,22 +36,12 @@ const getComponents = computed(() => objComponents[route.name])
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: none;
 }
 
-.nav-report {
-  width: 90%;
-  cursor: pointer;
-  text-decoration: none;
-  border: 1px solid blue;
-  padding: 10px 15px;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  align-items: center;
+.layout__side-bar {
+  background: none;
 }
 
-.nav-report:hover {
-  background-color: rgb(0, 0, 0, 0.4);
-  border-bottom: 1px solid white;
-}
+
 </style>

@@ -23,26 +23,27 @@ function getNameMonth(numberMonth) {
 }
 
 export const getCalendar = (year) => {
-  const calendar = {}
-  let nameMonth = ''
+  const calendar = []
+  
   for (let a = 0; a < 12; a++) {
     const days = []
     let day = 1
-    nameMonth = getNameMonth(a)
-    console.log('month', nameMonth)
+    const nameMonth = getNameMonth(a)
     const initDay = getDayInitMonth(a, year)
-    console.log('iniDAy', initDay)
     const totalDays = getMonthDays(a, year)
-    console.log('total', totalDays)
 
     for (let d = 0; d < totalDays + initDay; d++) {
       if (d < initDay) {
-        days.push('.')
+        days.push('')
       } else {
         days.push(day++)
       }
     }
-    calendar[nameMonth] = days
+    const m = {
+      nameM: nameMonth,
+      tDays: days
+    }
+    calendar.push(m);
   }
   return calendar;
 }

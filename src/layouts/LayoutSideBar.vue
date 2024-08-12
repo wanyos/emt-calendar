@@ -25,5 +25,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: none;
 }
+
 </style>

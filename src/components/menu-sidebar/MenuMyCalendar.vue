@@ -1,6 +1,5 @@
 <template>
-  <button>Aceptar</button>
-  <input type="text" placeholder="write year" />
+   <label for="">my calendar</label>
 </template>
 
 <script setup></script>

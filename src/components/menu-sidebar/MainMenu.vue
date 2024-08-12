@@ -1,26 +1,33 @@
 <template>
-  <router-link class="nav-item" :to="{ name: 'Calendar' }">Calendar</router-link>
-  <router-link class="nav-item" :to="{ name: 'My Calendar' }">My Calendar</router-link>
-  <router-link class="nav-item" :to="{ name: 'Settings' }">Settings</router-link>
+  <section class="section-menu">
+    <Button type="router-link" :to="{ name: 'Calendar' }" text="Calendar" customClass="px-14 py-2" class="nav-item" />
+    <Button type="router-link" :to="{ name: 'My Calendar' }" text="My Calendar" customClass="px-10 py-2" class="nav-item" />
+    <Button type="router-link" :to="{ name: 'Settings' }" text="Settings" customClass="px-14 py-2" class="nav-item" />
+  </section>
 </template>
 
-<script setup></script>
+<script setup>
+import Button from '@/components/global-components/Button.vue';
+</script>
 
 <style lang="css" scoped>
-.nav-item {
-  width: 90%;
-  text-align: center;
-  cursor: pointer;
-  margin-bottom: 1em;
-  text-decoration: none;
-  border: none;
-  border: 1px solid blue;
-  padding: 10px 15px;
-  border-radius: 10px;
+
+.section-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: none;
 }
 
-.nav-item:hover {
-  background-color: rgb(0, 0, 0, 0.4);
-  border-bottom: 1px solid white;
+.nav-item {
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+  width: 100%;
+  background: none;
+  text-align: center;
 }
+
 </style>

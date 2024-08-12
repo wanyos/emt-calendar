@@ -1,6 +1,5 @@
 <template>
-  <button>Settings</button>
-  <input type="text" placeholder="write year" />
+ <label for="">settings</label>
 </template>
 
 <script setup></script>

@@ -14,18 +14,10 @@
 
     <section class="section__body">
       <ul class="section__body-ul">
-        <!-- <li v-for="(day, index) in props.days" :key="index" class="section__body-days">
-          <component :is="day"></component>
-        </li> -->
-        <div class="section__body-days">1</div>
-        <div class="section__body-days">2</div>
-        <div class="section__body-days">3</div>
-        <div class="section__body-days">4</div>
-        <div class="section__body-days">5</div>
-        <div class="section__body-days">6</div>
-        <div class="section__body-days">7</div>
-        <div class="section__body-days">8</div>
-        <div class="section__body-days">9</div>
+        <li v-for="(day, index) in props.days" :key="index" class="section__body-days">
+          {{ day }}
+           <!-- <component :is="day"></component> -->
+        </li>
 
       </ul>
     </section>
@@ -49,10 +41,13 @@ const props = defineProps({
 
 <style lang="css" scoped>
 .section__month {
-  border: 2px solid blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: rgb(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 15px;
+ 
 }
 
 .section__title {
@@ -65,6 +60,8 @@ const props = defineProps({
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
   justify-items: center;
+  background-color: rgb(0, 0, 0, 0.6);
+ 
 }
 
 .article__head-weekdays {
@@ -73,18 +70,18 @@ const props = defineProps({
   font-size: 1em;
   display: flex;
   align-items: center;
+ 
 }
 
-.div__separate {
-  border: 1px solid blue;
+/* .div__separate {
   width: 95%;
   grid-column: 1 / 8;
-  height: 5px;
+  height: 10px;
   margin: auto;
-}
+} */
 
 .section__body {
-
+  background-color: rgb(0, 0, 0, 0.6);
 }
 
 .section__body-ul {
@@ -93,10 +90,11 @@ const props = defineProps({
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 10px;
+ 
 }
 
 .section__body-days {
-  border: 1px solid red;
+  border: 1px solid rgb(88, 201, 224);
   text-align: center;
   font-size: 0.8em;
 }

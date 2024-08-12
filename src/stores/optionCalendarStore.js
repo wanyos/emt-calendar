@@ -1,12 +1,23 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
-  const options = ref([])
+  // const options = ref([])
+  const options = ref({})
+  console.log('options store', options.value);
 
-  const setOptions = (opt) => {
-    options.value = opt
-  }
+ const changes = computed(() => { return options.value });
 
-  return { setOptions, options }
+// //  watch(options, newValue, oldValue, () => {
+// //   console.log('options', options.value);
+// //   console.log('newValue', newValue);
+// //  });
+
+
+  // const setOptions = (opt) => {
+  //   options.value = opt
+  //   console.log('options.value', options);
+  // }
+
+  return { options, changes }
 })

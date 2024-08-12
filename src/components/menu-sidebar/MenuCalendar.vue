@@ -65,8 +65,9 @@
       </select>
     </div>
 
-    <div class="form__div">
-      <button type="submit" class="form__submit">Search</button>
+    <div class="form__div-button">
+       <Button @click="submitForm()" type="button" text="Search" customClass="px-4 py-1" />
+       <p>  value {{ changes }} </p>
     </div>
   </form>
 </template>
@@ -76,8 +77,11 @@ import Button from '@/components/global-components/Button.vue'
 import { ref, onMounted, computed, watch } from 'vue'
 import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
+import { storeToRefs } from 'pinia'
 
-const { setOptions } = useOptionsCalendarStore()
+const storeOptions = useOptionsCalendarStore();
+const { options, changes } = storeToRefs(storeOptions);
+const { setOptionss } = storeOptions;
 
 const selectTypeCalendar = ref('')
 const selectGroup = ref('')
@@ -156,15 +160,15 @@ const typeCalendarConfig = {
   }
 }
 
-watch([selectTypeCalendar, selectGroup], ([calendar, grou], [preCalendar, preGroup]) => {
-  const config = typeCalendarConfig[selectTypeCalendar.value]
-  if (config) {
-    group.value = config.group
-    showSubgroup.value = config.showSubgroup
-    showRefuerzo.value = config.showRefuerzo
-    sub.value = config.sub || null
-  }
-})
+// watch([selectTypeCalendar, selectGroup], ([calendar, grou], [preCalendar, preGroup]) => {
+//   const config = typeCalendarConfig[selectTypeCalendar.value]
+//   if (config) {
+//     group.value = config.group
+//     showSubgroup.value = config.showSubgroup
+//     showRefuerzo.value = config.showRefuerzo
+//     sub.value = config.sub || null
+//   }
+// })
 
 /**
  * Existen 50 subgrupos, dependiendo de la seleccion del select grupo
@@ -183,8 +187,17 @@ function getArrayGruaDSM(selectValue) {
 }
 
 const submitForm = () => {
-  const options = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value]
-  setOptions(options)
+  const opt = {
+    type: selectTypeCalendar.value,
+    group: selectGroup.value,
+    subgroup: selectSub.value,
+    year: selectYear.value
+  }
+   options.value = opt;
+   console.log('options calendar', options.value);
+  //options.value = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
+  // const opt = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
+  // setOptions(opt);
 }
 </script>
 
@@ -194,12 +207,14 @@ const submitForm = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: none;
 }
 
 .form__div {
   padding: 0.5em 2em;
   display: flex;
   flex-direction: column;
+  background: none;
 }
 
 .form__div select {
@@ -214,15 +229,11 @@ const submitForm = () => {
   background-color: #585353;
 }
 
-.form__div button {
-  border: 1px solid blue;
-  padding: 10px 15px;
-  border-radius: 10px;
-}
-
-.form__div button:hover {
-  background-color: rgb(0, 0, 0, 0.4);
-  border-bottom: 1px solid white;
+.form__div-button {
+ padding: 1em;
+ display: flex;
+ justify-content: center;
+ background: none;
 }
 
 .section__div-radio {
@@ -240,18 +251,6 @@ const submitForm = () => {
   font-size: 15px;
 }
 
-.form__disabled-label {
-  color: gray;
-}
 
-.form__submit {
-  cursor: pointer;
-  width: 90%;
-  background-color: transparent;
-}
 
-.form__submit:hover {
-  background-color: rgb(0, 0, 0, 0.4);
-  border-bottom: 1px solid white;
-}
-</style>
+</style>, storeToRefsstoreToRefs, 

@@ -1,8 +1,8 @@
 <template>
   <div class="header__div-login">
-    <Button v-if="!userInfo.isLogin" class="button" text="SignUp" @click.prevent="showModalLogin(true)" />
-    <Button v-if="!userInfo.isLogin" class="button" text="SignIn" @click.prevent="showModalLogin(false)" />
-    <Button v-if="userInfo.isLogin" class="button" text="LogOut" @click.prevent="userInfo.setSignOut" />
+    <Button v-if="!userInfo.isLogin" class="button" type="button" text="SignUp" customClass="px-4 py-1" @click.prevent="showModalLogin(true)" />
+    <Button v-if="!userInfo.isLogin" class="button" type="button" text="SignIn" customClass="px-4 py-1" @click.prevent="showModalLogin(false)" />
+    <Button v-if="userInfo.isLogin" class="button" type="button" text="LogOut" customClass="px-4 py-1" @click.prevent="userInfo.setSignOut" />
   </div>
 </template>
 
@@ -27,6 +27,10 @@ const { showModalLogin } = useModal()
 
 .button {
   margin-right: 10px;
-  padding: 0;
 }
+
+.ownClass {
+  
+}
+
 </style>
