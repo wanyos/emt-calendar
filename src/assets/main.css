@@ -5,6 +5,9 @@
 
  :root {
   --main-background: rgba(87, 83, 83, 0.4);
+  --button-background: rgba(0, 0, 0, 0.9);
+  --month-background: rgba(0, 0, 0, 0.9);
+  --second-background: rgba(70, 65, 65);
 }
 
 * {

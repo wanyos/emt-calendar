@@ -10,16 +10,22 @@
 import Month from '@/components/calendar/Month.vue'
 import { getCalendar } from '@/calendars/createCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
-import { nextTick, watch, computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { computed, ref } from 'vue';
 
+let nowYear = ref(new Date().getFullYear());
 
-const store = useOptionsCalendarStore()
-console.log('options pos', store.options);
+const storeOptions = useOptionsCalendarStore();
+const { getOptions, getValor, valor } = storeToRefs(storeOptions);
 
-const months = getCalendar(2024);
-// console.log('year', months);
+console.log('valor', valor);
+console.log('computed', getValor.value);
 
+const getYear = computed(() => { return (getOptions.value === undefined) ? nowYear : getOptions.value });
+const months = computed(() => getCalendar(2024) );
+
+// console.log('computed year: ', getYear.value);
+// console.log('nowYear', nowYear.value);
 
 </script>
 

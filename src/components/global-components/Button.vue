@@ -58,20 +58,20 @@ const props = defineProps({
   border: 1px solid rgb(88, 201, 224);
   border-radius: 10px;
   text-align: center;
-  background-color: rgb(0, 0, 0, 0.6);
+  background-color: var(--button-background);
 }
 
 .button:hover {
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
   border-bottom: 1px solid white;
 }
 
 .button:focus {
-  background-color: rgb(0, 0, 0, 0.4);
+  border-bottom: 1px solid white;
 }
 
 .button:disabled {
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   cursor: not-allowed;
   pointer-events: none;
 }

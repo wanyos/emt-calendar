@@ -45,5 +45,6 @@ export const getCalendar = (year) => {
     }
     calendar.push(m);
   }
+  // console.log('year calendar', year);
   return calendar;
 }

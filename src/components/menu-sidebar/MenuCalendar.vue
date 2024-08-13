@@ -67,21 +67,21 @@
 
     <div class="form__div-button">
        <Button @click="submitForm()" type="button" text="Search" customClass="px-4 py-1" />
-       <p>  value {{ changes }} </p>
     </div>
   </form>
+  <p> {{ getOptions }} </p>
 </template>
 
 <script setup>
 import Button from '@/components/global-components/Button.vue'
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
 import { storeToRefs } from 'pinia'
 
 const storeOptions = useOptionsCalendarStore();
-const { options, changes } = storeToRefs(storeOptions);
-const { setOptionss } = storeOptions;
+const { options, getOptions } = storeToRefs(storeOptions);
+const { setOptions } = storeOptions;
 
 const selectTypeCalendar = ref('')
 const selectGroup = ref('')
@@ -160,16 +160,6 @@ const typeCalendarConfig = {
   }
 }
 
-// watch([selectTypeCalendar, selectGroup], ([calendar, grou], [preCalendar, preGroup]) => {
-//   const config = typeCalendarConfig[selectTypeCalendar.value]
-//   if (config) {
-//     group.value = config.group
-//     showSubgroup.value = config.showSubgroup
-//     showRefuerzo.value = config.showRefuerzo
-//     sub.value = config.sub || null
-//   }
-// })
-
 /**
  * Existen 50 subgrupos, dependiendo de la seleccion del select grupo
  * se calculan el resto para incluirlos en el select de subgrupo
@@ -193,8 +183,8 @@ const submitForm = () => {
     subgroup: selectSub.value,
     year: selectYear.value
   }
-   options.value = opt;
-   console.log('options calendar', options.value);
+  setOptions(opt);
+   // options.value = opt;
   //options.value = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
   // const opt = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
   // setOptions(opt);
@@ -221,12 +211,12 @@ const submitForm = () => {
   margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
-  background-color: #494545;
+  background-color: var(--second-background);
   cursor: pointer;
 }
 
 .form__div select:hover {
-  background-color: #585353;
+  background-color: var(--second-background);
 }
 
 .form__div-button {
@@ -251,6 +241,9 @@ const submitForm = () => {
   font-size: 15px;
 }
 
+option {
+  cursor: pointer;
+}
 
 
-</style>, storeToRefsstoreToRefs, 
+</style>

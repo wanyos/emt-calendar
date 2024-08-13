@@ -10,8 +10,6 @@
       </article>
     </section>
 
-    <div class="div__separate"></div>
-
     <section class="section__body">
       <ul class="section__body-ul">
         <li v-for="(day, index) in props.days" :key="index" class="section__body-days">
@@ -44,14 +42,15 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(0, 0, 0, 0.6);
+  background-color: var(--month-background);
   border-radius: 10px;
   padding: 15px;
- 
 }
 
 .section__title {
   margin: auto;
+  background-color: var(--month-background);
+  
 }
 
 .section__head {
@@ -60,7 +59,7 @@ const props = defineProps({
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
   justify-items: center;
-  background-color: rgb(0, 0, 0, 0.6);
+  background-color: var(--month-background);
  
 }
 
@@ -70,18 +69,12 @@ const props = defineProps({
   font-size: 1em;
   display: flex;
   align-items: center;
- 
+  background-color: var(--month-background);
 }
 
-/* .div__separate {
-  width: 95%;
-  grid-column: 1 / 8;
-  height: 10px;
-  margin: auto;
-} */
 
 .section__body {
-  background-color: rgb(0, 0, 0, 0.6);
+  background-color: var(--month-background);
 }
 
 .section__body-ul {
@@ -90,11 +83,12 @@ const props = defineProps({
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 10px;
- 
+  background-color: var(--month-background);
 }
 
 .section__body-days {
   border: 1px solid rgb(88, 201, 224);
+  background-color: var(--second-background);
   text-align: center;
   font-size: 0.8em;
 }
