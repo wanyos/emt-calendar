@@ -38,6 +38,10 @@ const props = defineProps({
 </script>
 
 <style lang="css" scoped>
+
+
+
+
 .section__month {
   display: flex;
   flex-direction: column;

@@ -79,16 +79,7 @@ import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
 import { storeToRefs } from 'pinia'
 
-const storeOptions = useOptionsCalendarStore();
-const { options, getOptions } = storeToRefs(storeOptions);
-const { setOptions } = storeOptions;
-
-const selectTypeCalendar = ref('')
-const selectGroup = ref('')
-const selectSub = ref('')
-const selectYear = ref('')
-const selectNumber = ref('')
-const selectLetter = ref('')
+let nowYear = new Date().getFullYear();
 
 const calendar = ref([])
 const group = ref([])
@@ -97,9 +88,12 @@ const years = ref([])
 const subRefuerzoN = ref([])
 const subRefuerzoL = ref([])
 
-const showSubgroup = ref(true)
-const showRefuerzo = ref(false)
-const radioSelect = ref('number')
+const selectTypeCalendar = ref('')
+const selectGroup = ref('')
+const selectSub = ref('')
+const selectYear = ref('')
+const selectNumber = ref('')
+const selectLetter = ref('')
 
 onMounted(() => {
   calendar.value = constants.typeCalendar
@@ -108,7 +102,22 @@ onMounted(() => {
   years.value = constants.years
   subRefuerzoN.value = constants.subRefuerzoN
   subRefuerzoL.value = constants.subRefuerzoL
+
+  selectTypeCalendar.value = constants.typeCalendar[0]
+  selectGroup.value = constants.groupFive[0]
+  selectSub.value = constants.subH[0]
+  selectYear.value = nowYear
 })
+
+const storeOptions = useOptionsCalendarStore();
+const { getOptions } = storeToRefs(storeOptions);
+const { setOptions } = storeOptions;
+
+const showSubgroup = ref(true)
+const showRefuerzo = ref(false)
+const radioSelect = ref('number')
+
+
 
 const labelClasses = (value) => {
   const classes = computed(() => {

@@ -1,9 +1,21 @@
 <template>
   <section class="section-app">
     <header class="header">
-      <div class="header__div-messages">
-        <p>{{ $route.name }}</p>
-      </div>
+      <section class="section-messages">
+
+        <div class="section__messages-route">
+          <p>{{ $route.name }}</p>
+        </div>
+
+        <div class="section__messages-title">
+
+          <div v-if="$route.name==='Calendar'" class="section__title-calendar">
+           Type:{{ getType }} - Group:{{ getGroup }} - Subgroup:{{ getSubgroup }} - Year:{{ getYear }}
+          </div>
+
+        </div>
+        
+      </section>
       <Login />
     </header>
 
@@ -37,8 +49,17 @@ import SideBar from '@/components/menu-sidebar/SideBar.vue'
 import Login from '@/components/login/Login.vue'
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore.js'
+import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
+import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
-const modalStore = useModal()
+onMounted(() => {
+  
+});
+
+const modalStore = useModal();
+const optionCalendarStore = useOptionsCalendarStore();
+const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarStore);
 
 </script>
 
@@ -65,8 +86,19 @@ const modalStore = useModal()
   justify-content: space-between;
 }
 
-.header__div-messages {
-  margin-left: 1em;
+.section-messages {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.section__messages-route {
+
+}
+
+.section__messages-title {
+  margin: auto;
 }
 
 .aside {

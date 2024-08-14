@@ -1,12 +1,15 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { ref, computed, reactive } from 'vue'
+import constants from '@/constants/dataFormCalendar.js'
 
 export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
-  const options = ref({})
-  const valor = ref(9);
+  let options = ref({})
+  let nowYear = new Date().getFullYear();
 
- const getOptions = computed(() => options.value );
- const getValor = computed(() => valor.value + 2);
+const getType = computed(() => options.value.type === undefined ? constants.typeCalendar[0] : options.value.type );
+const getGroup = computed(() => options.value.group === undefined ? constants.groupFive[0] : options.value.group );
+const getSubgroup = computed(() => options.value.subgroup === undefined ? constants.groupFive[0] : options.value.subgroup ); 
+const getYear = computed(() => options.value.year === undefined ? nowYear : parseInt(options.value.year));
 
   const setOptions = (opt) => {
     options.value = {
@@ -15,13 +18,9 @@ export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
       subgroup: opt.subgroup,
       year: opt.year
     }
-    console.log('options store', options.value);
   }
 
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
 
-  return { getOptions, getValor, valor, setOptions }
+  return { getType, getGroup, getSubgroup, getYear, setOptions }
 })
+
