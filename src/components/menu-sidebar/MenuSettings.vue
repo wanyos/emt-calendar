@@ -1,5 +1,5 @@
 <template>
- <label for="">settings</label>
+  <label for="">settings</label>
 </template>
 
 <script setup></script>

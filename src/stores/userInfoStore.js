@@ -1,21 +1,23 @@
+/* eslint-disable no-undef */
 import { defineStore } from 'pinia'
 import { reactive, ref, computed } from 'vue'
-import { auth, createUserWithEmailAndPassword ,GoogleAuthProvider, signInWithEmailAndPassword, signOut, signInWithPopup } from '@/firebase/firebaseConfig'
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signOut,
+  signInWithPopup
+} from '@/firebase/firebaseConfig'
 import router from '@/router/index.js'
 import User from '@/models/user'
 
-import {
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged
-} from 'firebase/auth'
+import { signInWithRedirect, getRedirectResult, onAuthStateChanged } from 'firebase/auth'
 
 import { addDocument, getUserData, getDocuments } from '@/firebase/firestoreService'
 
 export const useUserInfo = defineStore('useUserInfo', () => {
-  
-  
-  const user = reactive(new User());
+  const user = reactive(new User())
 
   const isLogin = computed(() => user.id !== undefined && user.email !== undefined)
 
@@ -27,8 +29,12 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         user.email = usr.email
 
         // new user
-        addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
-
+        addDocument(user.id, {
+          name: 'juanjo',
+          middleName: 'romero',
+          lastName: 'ramos',
+          email: user.email
+        })
       })
       .catch((error) => {
         console.log('error', error)
@@ -44,9 +50,8 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
         // get user
         getUserData(user.id)
-        .then((data) => console.log('data firestore', data) )
-        .catch(() => consoel.log('no search...'))
-
+          .then((data) => console.log('data firestore', data))
+          .catch(() => consoel.log('no search...'))
       })
       .catch((error) => {
         console.log('error', error)
@@ -70,28 +75,30 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       prompt: 'select_account'
     })
     await signInWithPopup(auth, provider).then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      const token = credential.accessToken
       user.id = result.user.uid
       user.email = result.user.email
 
       getUserData(user.id)
-      .then((data) => {
-       if(data === null){
-         addDocument(user.id, { name: 'juanjo', middleName: 'romero', lastName: 'ramos', email: user.email });
-       } else {
-         console.log('data',data)
-         console.log('id', user.id)
-       }
-      })
-      .catch((err) => {
-       consoel.log('err', err)
-      })
-
+        .then((data) => {
+          if (data === null) {
+            addDocument(user.id, {
+              name: 'juanjo',
+              middleName: 'romero',
+              lastName: 'ramos',
+              email: user.email
+            })
+          } else {
+            console.log('data', data)
+            console.log('id', user.id)
+          }
+        })
+        .catch((err) => {
+          consoel.log('err', err)
+        })
     })
-
   }
-
 
   // const  setSignInGoogle = async () => {
   //   const auth = getAuth()
@@ -115,7 +122,6 @@ export const useUserInfo = defineStore('useUserInfo', () => {
   //     });
   //   };
 
-  
   //   signWith()
   //   .then(() => {
   //     getRedirectResult(auth)
@@ -125,7 +131,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
   //       const token = credential.accessToken
   //       console.log('token', token)
-      
+
   //       const user = result.user
   //        console.log('user', user)
   //     })
@@ -141,7 +147,6 @@ export const useUserInfo = defineStore('useUserInfo', () => {
   // }
 
   //  console.log('route', router.currentRoute.value.name)
- 
 
   return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, isLogin }
 })

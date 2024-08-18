@@ -2,34 +2,40 @@
   <Modal>
     <template #default>
       <section class="section__modal">
+
         <div class="section__modal-div">
 
-        <section class="section__header">
-          <label>{{ props.title }}</label>
-          <button @click="closeModal">X</button>
-        </section>
+          <section class="section__header">
+            <label>{{ props.title }}</label>
+            <button @click="closeModal">X</button>
+          </section>
 
           <section class="section__form">
             <form action="" class="form">
               <div class="form__div">
                 <label for="user">Email</label>
-                <input type="email" name="user" v-model="email" />
+                <input v-model="email" type="email" name="user" autocomplete="off" />
               </div>
 
               <div class="form__div">
                 <label for="password">Password</label>
-                <input type="password" name="password" v-model="password" />
+                <input v-model="password" type="password" name="password" />
               </div>
 
               <div class="div__button">
                 <button @click.prevent="login">Sent</button>
-                <button @click.prevent="loginGoogle"> <img class="icon" src="@/assets/img/icon-google.webp" /> </button>
+                <button @click.prevent="loginGoogle">
+                  <img class="icon" src="@/assets/img/icon-google.webp" />
+                </button>
               </div>
-             
             </form>
           </section>
 
         </div>
+     
+         
+        
+
       </section>
     </template>
   </Modal>
@@ -55,47 +61,46 @@ const email = ref('')
 const password = ref('')
 
 const login = () => {
-  props.title === 'SignUp' ?  setSignUp(email, password) : setSignIn(email, password)
- closeModal()
+  props.title === 'SignUp' ? setSignUp(email, password) : setSignIn(email, password)
+  closeModal()
 }
 const loginGoogle = () => {
   setSignInGoogle()
   closeModal()
 }
-
 </script>
 
 <style lang="css" scoped>
 .section__modal {
-  position: relative;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
-  backdrop-filter: blur(5px);
-}
-
-.section__header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 
 .section__modal-div {
-  margin-top: 5em;
-  width: 40%;
-  height: 30%;
+  width: 25rem;
   border-radius: 10px;
-  box-shadow:
+  /* box-shadow:
     0 15px 30px rgba(95, 82, 143, 0.3),
-    0 8px 16px rgba(120, 102, 190, 0.1);
-  background-color: #1a1a1a;
+    0 8px 16px rgba(120, 102, 190, 0.1); */
+  background-color: #0009;
   color: #ffffff;
-  padding: 2rem;
+}
+
+.section__header {
+  width: 90%;
+  margin: auto;
+  height: 2.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0009;
 }
 
 .section__form {
-  padding: 15px;
+  background-color: #0009;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,7 +110,8 @@ const loginGoogle = () => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
+  padding: 2em;
+  background: none;
 }
 
 .form__div {
@@ -116,15 +122,18 @@ const loginGoogle = () => {
 
 .form__div label {
   margin-bottom: 0.5rem;
+  background-color: #0009;
 }
 
 .form__div input {
   margin-bottom: 1rem;
-  padding: 0.3rem;
+  padding: 0.1rem 1em;
   border-radius: 5px;
   border: none;
-  background-color: #333333;
-  color: #ffffff;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  background: #3d3a3a;
+  outline: none;
 }
 
 .section__modal-div button {
@@ -137,7 +146,11 @@ const loginGoogle = () => {
 }
 
 .section__header button {
-  background-color: #333333;
+ background-color: #0009;
+}
+
+.section__header button:hover {
+  background-color: #212223;
 }
 
 .div__button {
@@ -156,5 +169,4 @@ const loginGoogle = () => {
   width: 25px;
   margin-right: 10px;
 }
-
 </style>

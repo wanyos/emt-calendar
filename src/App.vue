@@ -2,19 +2,17 @@
   <section class="section-app">
     <header class="header">
       <section class="section-messages">
-
         <div class="section__messages-route">
           <p>{{ $route.name }}</p>
         </div>
 
         <div class="section__messages-title">
-
-          <div v-if="$route.name==='Calendar'" class="section__title-calendar">
-           Type:{{ getType }} - Group:{{ getGroup }} - Subgroup:{{ getSubgroup }} - Year:{{ getYear }}
+          <div v-if="$route.name === 'Calendar'" class="section__title-calendar">
+            Type:{{ getType }} - Group:{{ getGroup }} - Subgroup:{{ getSubgroup }} - Year:{{
+              getYear
+            }}
           </div>
-
         </div>
-        
       </section>
       <Login />
     </header>
@@ -53,20 +51,17 @@ import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
-onMounted(() => {
-  
-});
+onMounted(() => {})
 
-const modalStore = useModal();
-const optionCalendarStore = useOptionsCalendarStore();
-const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarStore);
-
+const modalStore = useModal()
+const optionCalendarStore = useOptionsCalendarStore()
+const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarStore)
 </script>
 
 <style scoped>
 .section-app {
-  max-width: 1940px;
   min-height: 100vh;
+  background-color: var(--main-background);
   margin: auto;
   display: grid;
   grid-template-columns: 16rem auto;
@@ -74,10 +69,10 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
 }
 
 .header {
- grid-column: 2 / 4;
- display: flex;
- align-items: center;
- justify-content: space-between;
+  grid-column: 2 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header__messages {
@@ -93,9 +88,6 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
   align-items: center;
 }
 
-.section__messages-route {
-
-}
 
 .section__messages-title {
   margin: auto;
@@ -116,7 +108,6 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
   display: flex;
   justify-content: center;
   align-items: center;
-  background: none;
 }
 
 .main {
@@ -131,5 +122,4 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
   justify-content: center;
   align-items: center;
 }
-
 </style>

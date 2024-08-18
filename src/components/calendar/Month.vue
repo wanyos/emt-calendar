@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="section__month">
     <section class="section__title">
@@ -14,9 +15,8 @@
       <ul class="section__body-ul">
         <li v-for="(day, index) in props.days" :key="index" class="section__body-days">
           {{ day }}
-           <!-- <component :is="day"></component> -->
+          <!-- <component :is="day"></component> -->
         </li>
-
       </ul>
     </section>
   </section>
@@ -38,10 +38,6 @@ const props = defineProps({
 </script>
 
 <style lang="css" scoped>
-
-
-
-
 .section__month {
   display: flex;
   flex-direction: column;
@@ -54,7 +50,6 @@ const props = defineProps({
 .section__title {
   margin: auto;
   background-color: var(--month-background);
-  
 }
 
 .section__head {
@@ -64,7 +59,6 @@ const props = defineProps({
   grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--month-background);
- 
 }
 
 .article__head-weekdays {
@@ -75,7 +69,6 @@ const props = defineProps({
   align-items: center;
   background-color: var(--month-background);
 }
-
 
 .section__body {
   background-color: var(--month-background);

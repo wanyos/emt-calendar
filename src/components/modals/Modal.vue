@@ -14,5 +14,6 @@ const modalStore = useModal()
   position: fixed;
   min-width: 100vw;
   min-height: 100vh;
+  backdrop-filter: blur(4px);
 }
 </style>

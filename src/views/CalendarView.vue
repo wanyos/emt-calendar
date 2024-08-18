@@ -1,8 +1,7 @@
 <template>
-    <p> {{ year }} </p>
+  <p>{{ year }}</p>
   <section class="section__calendar">
-    <Month v-for="(item, index) in months" :key="index" :name=item.nameM :days="item.tDays" />
- 
+    <Month v-for="(item, index) in months" :key="index" :name="item.nameM" :days="item.tDays" />
   </section>
 </template>
 
@@ -11,13 +10,11 @@ import Month from '@/components/calendar/Month.vue'
 import { getCalendar } from '@/calendars/createCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const storeOptions = useOptionsCalendarStore();
-const { getYear } = storeToRefs(storeOptions);
-const months = computed(() => getCalendar(getYear.value));
-
-
+const storeOptions = useOptionsCalendarStore()
+const { getYear } = storeToRefs(storeOptions)
+const months = computed(() => getCalendar(getYear.value))
 </script>
 
 <style scoped lang="css">
@@ -27,6 +24,5 @@ const months = computed(() => getCalendar(getYear.value));
   grid-template-rows: repeat(4, 1fr);
   gap: 15px;
   margin: 20px;
-  background: none;
 }
 </style>

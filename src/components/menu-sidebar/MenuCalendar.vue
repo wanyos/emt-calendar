@@ -66,10 +66,10 @@
     </div>
 
     <div class="form__div-button">
-       <Button @click="submitForm()" type="button" text="Search" customClass="px-4 py-1" />
+      <Button type="button" text="Search" custom-class="px-4 py-1" @click="submitForm()" />
     </div>
   </form>
-  <p> {{ getOptions }} </p>
+  <p>{{ getOptions }}</p>
 </template>
 
 <script setup>
@@ -79,7 +79,7 @@ import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
 import { storeToRefs } from 'pinia'
 
-let nowYear = new Date().getFullYear();
+let nowYear = new Date().getFullYear()
 
 const calendar = ref([])
 const group = ref([])
@@ -96,28 +96,26 @@ const selectNumber = ref('')
 const selectLetter = ref('')
 
 onMounted(() => {
-  calendar.value = constants.typeCalendar
-  group.value = constants.groupFive
-  sub.value = constants.subH
-  years.value = constants.years
-  subRefuerzoN.value = constants.subRefuerzoN
-  subRefuerzoL.value = constants.subRefuerzoL
+  calendar.value = constants.TYPE_CALENDAR
+  group.value = constants.GROUP_FIVE
+  sub.value = constants.SUB_H
+  years.value = constants.YEARS
+  subRefuerzoN.value = constants.SUB_REFUERZO_N
+  subRefuerzoL.value = constants.SUB_REFUERZO_L
 
-  selectTypeCalendar.value = constants.typeCalendar[0]
-  selectGroup.value = constants.groupFive[0]
-  selectSub.value = constants.subH[0]
+  selectTypeCalendar.value = constants.TYPE_CALENDAR.CONDUCTOR
+  selectGroup.value = constants.GROUP_FIVE[0]
+  selectSub.value = constants.SUB_H[0]
   selectYear.value = nowYear
 })
 
-const storeOptions = useOptionsCalendarStore();
-const { getOptions } = storeToRefs(storeOptions);
-const { setOptions } = storeOptions;
+const storeOptions = useOptionsCalendarStore()
+const { getOptions } = storeToRefs(storeOptions)
+const { setOptions } = storeOptions
 
 const showSubgroup = ref(true)
 const showRefuerzo = ref(false)
 const radioSelect = ref('number')
-
-
 
 const labelClasses = (value) => {
   const classes = computed(() => {
@@ -126,48 +124,48 @@ const labelClasses = (value) => {
   return classes.value
 }
 
-const typeCalendarConfig = {
-  'Conductor': {
-    group: constants.groupFive,
-    sub: constants.subH,
-    showRefuerzo: false,
-    showSubgroup: true
-  },
-  'Conductor-Buho': {
-    group: constants.groupFive,
-    sub: constants.subH,
-    showRefuerzo: false,
-    showSubgroup: true
-  },
-  'GruaDSM-Noche': { group: constants.groupThree, showRefuerzo: false, showSubgroup: false },
-  'ParkingDSM-100': { group: constants.groupTen, showRefuerzo: false, showSubgroup: false },
-  'ParkingDSM-50': { group: constants.groupTwelve, showRefuerzo: false, showSubgroup: false },
-  'Refuerzo-Nocturno': { group: constants.groupTwo, showRefuerzo: true, showSubgroup: false },
-  'GruaDSM': {
-    group: constants.groupFive,
-    sub: getArrayGruaDSM(selectGroup.value),
-    showRefuerzo: false,
-    showSubgroup: true
-  },
-  'Inspector': {
-    group: constants.groupFive,
-    sub: constants.subJ,
-    showRefuerzo: false,
-    showSubgroup: true
-  },
-  'Inspector-Noche': {
-    group: constants.groupFive,
-    sub: constants.subJ,
-    showRefuerzo: false,
-    showSubgroup: true
-  },
-  'Grua': {
-    group: constants.groupFive,
-    sub: constants.subC,
-    showRefuerzo: false,
-    showSubgroup: true
-  }
-}
+// const typeCalendarConfig = {
+//   'Conductor': {
+//     group: constants.groupFive,
+//     sub: constants.subH,
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   },
+//   'Conductor-Buho': {
+//     group: constants.groupFive,
+//     sub: constants.subH,
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   },
+//   'GruaDSM-Noche': { group: constants.groupThree, showRefuerzo: false, showSubgroup: false },
+//   'ParkingDSM-100': { group: constants.groupTen, showRefuerzo: false, showSubgroup: false },
+//   'ParkingDSM-50': { group: constants.groupTwelve, showRefuerzo: false, showSubgroup: false },
+//   'Refuerzo-Nocturno': { group: constants.groupTwo, showRefuerzo: true, showSubgroup: false },
+//   'GruaDSM': {
+//     group: constants.groupFive,
+//     sub: getArrayGruaDSM(selectGroup.value),
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   },
+//   'Inspector': {
+//     group: constants.groupFive,
+//     sub: constants.subJ,
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   },
+//   'Inspector-Noche': {
+//     group: constants.groupFive,
+//     sub: constants.subJ,
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   },
+//   'Grua': {
+//     group: constants.groupFive,
+//     sub: constants.subC,
+//     showRefuerzo: false,
+//     showSubgroup: true
+//   }
+// }
 
 /**
  * Existen 50 subgrupos, dependiendo de la seleccion del select grupo
@@ -192,11 +190,7 @@ const submitForm = () => {
     subgroup: selectSub.value,
     year: selectYear.value
   }
-  setOptions(opt);
-   // options.value = opt;
-  //options.value = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
-  // const opt = [selectTypeCalendar.value, selectGroup.value, selectSub.value, selectYear.value];
-  // setOptions(opt);
+  setOptions(opt)
 }
 </script>
 
@@ -206,14 +200,12 @@ const submitForm = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: none;
 }
 
 .form__div {
   padding: 0.5em 2em;
   display: flex;
   flex-direction: column;
-  background: none;
 }
 
 .form__div select {
@@ -225,14 +217,13 @@ const submitForm = () => {
 }
 
 .form__div select:hover {
-  background-color: var(--second-background);
+ 
 }
 
 .form__div-button {
- padding: 1em;
- display: flex;
- justify-content: center;
- background: none;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
 }
 
 .section__div-radio {
@@ -253,6 +244,4 @@ const submitForm = () => {
 option {
   cursor: pointer;
 }
-
-
 </style>

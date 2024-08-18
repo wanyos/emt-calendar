@@ -4,12 +4,20 @@ import constants from '@/constants/dataFormCalendar.js'
 
 export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
   let options = ref({})
-  let nowYear = new Date().getFullYear();
+  let nowYear = new Date().getFullYear()
 
-const getType = computed(() => options.value.type === undefined ? constants.typeCalendar[0] : options.value.type );
-const getGroup = computed(() => options.value.group === undefined ? constants.groupFive[0] : options.value.group );
-const getSubgroup = computed(() => options.value.subgroup === undefined ? constants.groupFive[0] : options.value.subgroup ); 
-const getYear = computed(() => options.value.year === undefined ? nowYear : parseInt(options.value.year));
+  const getType = computed(() =>
+    options.value.type === undefined ? constants.TYPE_CALENDAR.CONDUCTOR : options.value.type
+  )
+  const getGroup = computed(() =>
+    options.value.group === undefined ? constants.GROUP_FIVE[0] : options.value.group
+  )
+  const getSubgroup = computed(() =>
+    options.value.subgroup === undefined ? constants.SUB_H[0] : options.value.subgroup
+  )
+  const getYear = computed(() =>
+    options.value.year === undefined ? nowYear : parseInt(options.value.year)
+  )
 
   const setOptions = (opt) => {
     options.value = {
@@ -20,7 +28,5 @@ const getYear = computed(() => options.value.year === undefined ? nowYear : pars
     }
   }
 
-
   return { getType, getGroup, getSubgroup, getYear, setOptions }
 })
-

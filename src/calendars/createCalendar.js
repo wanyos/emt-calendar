@@ -24,7 +24,7 @@ function getNameMonth(numberMonth) {
 
 export const getCalendar = (year) => {
   const calendar = []
-  
+
   for (let a = 0; a < 12; a++) {
     const days = []
     let day = 1
@@ -43,8 +43,8 @@ export const getCalendar = (year) => {
       nameM: nameMonth,
       tDays: days
     }
-    calendar.push(m);
+    calendar.push(m)
   }
   // console.log('year calendar', year);
-  return calendar;
+  return calendar
 }

@@ -1,5 +1,5 @@
 <template>
-   <label for="">my calendar</label>
+  <label for="">my calendar</label>
 </template>
 
 <script setup></script>

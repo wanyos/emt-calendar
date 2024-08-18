@@ -1,29 +1,31 @@
-const typeCalendar = [
-  'Conductor',
-  'Conductor-Buho',
-  'Refuerzo-Nocturno',
-  'Inspector',
-  'Inspector-Noche',
-  'Grua',
-  'GruaDSM',
-  'GruaDSM-Noche',
-  'ParkingDSM-100',
-  'ParkingDSM-50'
-]
+const TYPE_CALENDAR = {
+  CONDUCTOR: 'Conductor',
+  CONDUCTOR_BUHO: 'Conductor-Buho',
+  REFUERZO_NOCTURNO: 'Refuerzo-Nocturno',
+  INSPECTOR: 'Inspector',
+  INSPECTOR_NOCHE: 'Inspector-Noche',
+  GRUA: 'Grua',
+  GRUA_DSM: 'GruaDSM',
+  GRUA_DSM_NOCHE: 'GruaDSM-Noche',
+  PARKING_100: 'ParkingDSM-100',
+  PARKING_50: 'ParkingDSM-50'
+}
+  
 
-const groupTwo = ['A', 'B']
-const groupThree = ['1', '2', '3']
-const groupFive = ['1', '2', '3', '4', '5']
-const groupTen = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-const groupTwelve = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
-const subC = ['A', 'B', 'C']
-const subH = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
-const subJ = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
-const subRefuerzoN = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-const subRefuerzoL = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
+const GROUP_TWO = ['A', 'B']
+const GROUP_THREE = ['1', '2', '3']
+const GROUP_FIVE = ['1', '2', '3', '4', '5']
+const GROUP_TEN = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+const GROUP_TWELVE = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
 
-const years = [
+const SUB_C = ['A', 'B', 'C']
+const SUB_H = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+const SUB_J = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+const SUB_REFUERZO_N = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+const SUB_REFUERZO_L = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
+
+const YEARS = [
   '2020',
   '2021',
   '2022',
@@ -38,16 +40,16 @@ const years = [
 ]
 
 export default {
-  typeCalendar,
-  groupTwo,
-  groupThree,
-  groupFive,
-  groupTen,
-  groupTwelve,
-  subC,
-  subH,
-  subJ,
-  years,
-  subRefuerzoN,
-  subRefuerzoL
+  TYPE_CALENDAR,
+  GROUP_TWO,
+  GROUP_THREE,
+  GROUP_FIVE,
+  GROUP_TEN,
+  GROUP_TWELVE,
+  SUB_C,
+  SUB_H,
+  SUB_J,
+  YEARS,
+  SUB_REFUERZO_N,
+  SUB_REFUERZO_L
 }
