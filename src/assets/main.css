@@ -8,6 +8,7 @@
   --button-background: rgba(0, 0, 0, 0.9);
   --month-background: rgba(0, 0, 0, 0.9);
   --second-background: rgba(70, 65, 65);
+  --border-main: rgb(88, 201, 224);
 }
 
 * {
@@ -30,18 +31,10 @@ html {
   [disabled] {
       @apply cursor-not-allowed;
   }
-
   [disabled]:hover {
       @apply hover:cursor-not-allowed;
   }
 } */
 
-/* section, aside, div, article, footer, main, select, button, p, header, h1, nav, ul, li, a {
-  background: var(--main-background);
-} */
-
-/* label {
-  background: none;
-}  */
 
 

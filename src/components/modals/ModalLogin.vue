@@ -2,9 +2,7 @@
   <Modal>
     <template #default>
       <section class="section__modal">
-
         <div class="section__modal-div">
-
           <section class="section__header">
             <label>{{ props.title }}</label>
             <button @click="closeModal">X</button>
@@ -14,28 +12,37 @@
             <form action="" class="form">
               <div class="form__div">
                 <label for="user">Email</label>
-                <input v-model="email" type="email" name="user" autocomplete="off" />
+                <input
+                  @focus="email = ''"
+                  v-model="email"
+                  type="email"
+                  name="user"
+                  autocomplete="off"
+                />
               </div>
 
               <div class="form__div">
                 <label for="password">Password</label>
-                <input v-model="password" type="password" name="password" />
+                <input @focus="password = ''" v-model="password" type="password" name="password" />
               </div>
 
               <div class="div__button">
                 <button @click.prevent="login">Sent</button>
-                <button @click.prevent="loginGoogle">
+                <button v-if="props.title === 'SignIn'" @click.prevent="loginGoogle">
                   <img class="icon" src="@/assets/img/icon-google.webp" />
                 </button>
+
+                <button v-if="props.title === 'SignIn'" @click.prevent="loginMicrosoft">
+                  <img class="icon" src="@/assets/img/icon-microsoft.png" />
+                </button>
+              </div>
+
+              <div v-if="userInfo.isErrorLogin && !closeError" class="div__error">
+                <p>There was an error while logging in...</p>
               </div>
             </form>
           </section>
-
         </div>
-     
-         
-        
-
       </section>
     </template>
   </Modal>
@@ -45,7 +52,7 @@
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore'
 import { useUserInfo } from '@/stores/userInfoStore'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   title: {
@@ -55,18 +62,50 @@ const props = defineProps({
 })
 
 const { closeModal } = useModal()
+const userInfo = useUserInfo()
 const { setSignUp, setSignIn, setSignInGoogle } = useUserInfo()
 
 const email = ref('')
 const password = ref('')
+const closeError = ref(false)
 
-const login = () => {
-  props.title === 'SignUp' ? setSignUp(email, password) : setSignIn(email, password)
-  closeModal()
+watch(
+  () => userInfo.isLogin,
+  (newVal) => {
+    if (newVal) {
+      closeModal()
+    }
+  }
+)
+
+watch(
+  () => email.value,
+  (newVal, oldVal) => {
+    if (newVal === '' && oldVal !== '' && userInfo.isErrorLogin) {
+      closeError.value = true
+    }
+  }
+)
+
+watch(
+  () => password.value,
+  (newVal, oldVal) => {
+    if (newVal === '' && oldVal !== '' && userInfo.isErrorLogin) {
+      closeError.value = true
+    }
+  }
+)
+
+const login = async () => {
+  closeError.value = false
+  props.title === 'SignUp' ? await setSignUp(email, password) : await setSignIn(email, password)
 }
 const loginGoogle = () => {
   setSignInGoogle()
-  closeModal()
+}
+
+const loginMicrosoft = () => {
+   
 }
 </script>
 
@@ -79,23 +118,19 @@ const loginGoogle = () => {
 }
 
 .section__modal-div {
-  width: 25rem;
+  width: 30rem;
   border-radius: 10px;
-  /* box-shadow:
-    0 15px 30px rgba(95, 82, 143, 0.3),
-    0 8px 16px rgba(120, 102, 190, 0.1); */
   background-color: #0009;
   color: #ffffff;
 }
 
 .section__header {
-  width: 90%;
-  margin: auto;
-  height: 2.5em;
+  height: 3.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0009;
+  padding: 20px;
 }
 
 .section__form {
@@ -127,7 +162,7 @@ const loginGoogle = () => {
 
 .form__div input {
   margin-bottom: 1rem;
-  padding: 0.1rem 1em;
+  padding: 0.5rem 1em;
   border-radius: 5px;
   border: none;
   border-bottom: 2px solid #fff;
@@ -146,7 +181,7 @@ const loginGoogle = () => {
 }
 
 .section__header button {
- background-color: #0009;
+  background-color: #0009;
 }
 
 .section__header button:hover {
@@ -168,5 +203,15 @@ const loginGoogle = () => {
 .icon {
   width: 25px;
   margin-right: 10px;
+}
+
+.div__error {
+  padding: 15px 0;
+}
+
+.div__error p {
+  color: rgb(207, 53, 53);
+  text-align: center;
+  font-size: 18px;
 }
 </style>

@@ -31,7 +31,6 @@
 import Button from '@/components/global-components/Button.vue'
 import { useUserInfo } from '@/stores/userInfoStore'
 import { useModal } from '@/stores/modalStore'
-import { computed } from 'vue'
 
 const userInfo = useUserInfo()
 const { showModalLogin } = useModal()

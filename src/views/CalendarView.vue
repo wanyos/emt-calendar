@@ -1,5 +1,4 @@
 <template>
-  <p>{{ year }}</p>
   <section class="section__calendar">
     <Month v-for="(item, index) in months" :key="index" :name="item.nameM" :days="item.tDays" />
   </section>

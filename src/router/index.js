@@ -10,31 +10,47 @@ const router = createRouter({
     {
       path: '/',
       name: 'Report',
-      component: ReportView
+      component: ReportView,
+      meta: {
+        requireAuth: false
+      }
     },
     {
       path: '/calendar',
       name: 'Calendar',
-      component: CalendarView
+      component: CalendarView,
+      meta: {
+        requireAuth: false
+      }
     },
     {
       path: '/my-calendar',
       name: 'My Calendar',
-      component: MyCalendarView
+      component: MyCalendarView,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/settings',
       name: 'Settings',
-      component: SettingsView
+      component: SettingsView,
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   const { setNamePage } = useCurrentPagesStore()
-//   const name = to.name
-//   setNamePage(name)
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+ // eslint-disable-next-line no-undef
+ const auth = $cookies.get('usertoken') !== null;
+ const needAuth = to.meta.requireAuth;
+  if(needAuth && !auth){
+    next('/');
+  } else {
+    next();
+  }
+})
 
 export default router

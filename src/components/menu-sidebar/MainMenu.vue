@@ -8,6 +8,7 @@
       class="nav-item"
     />
     <Button
+      v-if="userStore.isLogin"
       type="router-link"
       :to="{ name: 'My Calendar' }"
       text="My Calendar"
@@ -15,6 +16,7 @@
       class="nav-item"
     />
     <Button
+      v-if="userStore.isLogin"
       type="router-link"
       :to="{ name: 'Settings' }"
       text="Settings"
@@ -26,6 +28,9 @@
 
 <script setup>
 import Button from '@/components/global-components/Button.vue'
+import { useUserInfo } from '@/stores/userInfoStore.js'
+
+const userStore = useUserInfo()
 </script>
 
 <style lang="css" scoped>

@@ -55,7 +55,7 @@ const props = defineProps({
 <style scoped>
 .button {
   cursor: pointer;
-  border: 1px solid rgb(88, 201, 224);
+  border: 1px solid var(--border-main);
   border-radius: 10px;
   text-align: center;
   background-color: var(--button-background);

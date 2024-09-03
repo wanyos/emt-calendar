@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { db } from '@/firebase/firebaseConfig'
+// import { db } from '@/firebase/firebaseConfig'
 import {
   collection,
   addDoc,

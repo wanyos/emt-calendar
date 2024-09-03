@@ -2,15 +2,12 @@
   <section class="section-app">
     <header class="header">
       <section class="section-messages">
-        <div class="section__messages-route">
-          <p>{{ $route.name }}</p>
-        </div>
-
         <div class="section__messages-title">
-          <div v-if="$route.name === 'Calendar'" class="section__title-calendar">
-            Type:{{ getType }} - Group:{{ getGroup }} - Subgroup:{{ getSubgroup }} - Year:{{
-              getYear
-            }}
+          <div v-if="$route.name === 'Calendar'">
+            <ItemInfo class="mx-1" title="Type:" :message="getType" />
+            <ItemInfo class="mx-1" title="Group:" :message="getGroup" />
+            <ItemInfo class="mx-1" title="Subgroup:" :message="getSubgroup" />
+            <ItemInfo class="mx-1" title="Year:" :message="getYear" />
           </div>
         </div>
       </section>
@@ -19,7 +16,10 @@
 
     <aside class="aside">
       <section class="aside__brand">
-        <Icon :img-url="report" />
+        <Icon :img-url="logo" size="w-10 h-10 rounded-xl" />
+        <div class="section__messages-route">
+          <p>{{ $route.name }}</p>
+        </div>
       </section>
 
       <SideBar />
@@ -41,17 +41,14 @@
 
 <script setup>
 import Icon from '@/components/icons/Icon.vue'
-import calendar from '@/assets/img/calendar.svg'
-import report from '@/assets/img/report.svg'
+import logo from '@/assets/logo.ico'
 import SideBar from '@/components/menu-sidebar/SideBar.vue'
 import Login from '@/components/login/Login.vue'
 import Modal from '@/components/modals/Modal.vue'
+import ItemInfo from '@/components/global-components/ItemInfo.vue'
 import { useModal } from '@/stores/modalStore.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
-
-onMounted(() => {})
 
 const modalStore = useModal()
 const optionCalendarStore = useOptionsCalendarStore()
@@ -75,6 +72,14 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
   justify-content: space-between;
 }
 
+.section__messages-route p {
+  font-size: large;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 0 15px;
+  width: 9em;
+}
+
 .header__messages {
   display: flex;
   align-items: center;
@@ -87,7 +92,6 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
   display: flex;
   align-items: center;
 }
-
 
 .section__messages-title {
   margin: auto;

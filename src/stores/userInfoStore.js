@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { defineStore } from 'pinia'
-import { reactive, ref, computed } from 'vue'
+import { reactive, computed, ref } from 'vue'
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -9,17 +9,18 @@ import {
   signOut,
   signInWithPopup
 } from '@/firebase/firebaseConfig'
-import router from '@/router/index.js'
 import User from '@/models/user'
-
-import { signInWithRedirect, getRedirectResult, onAuthStateChanged } from 'firebase/auth'
-
-import { addDocument, getUserData, getDocuments } from '@/firebase/firestoreService'
 
 export const useUserInfo = defineStore('useUserInfo', () => {
   const user = reactive(new User())
+  const token = ref('')
+  const isErrorLogin = ref(false);
 
-  const isLogin = computed(() => user.id !== undefined && user.email !== undefined)
+  token.value = $cookies.get('usertoken')
+  user.id = $cookies.get('userid')
+  user.email = $cookies.get('useremail')
+
+  const isLogin = computed(() => token !== null && user.id !== null && user.email !== null)
 
   const setSignUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email.value, password.value)
@@ -28,15 +29,12 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         user.id = usr.uid
         user.email = usr.email
 
-        // new user
-        addDocument(user.id, {
-          name: 'juanjo',
-          middleName: 'romero',
-          lastName: 'ramos',
-          email: user.email
-        })
+        $cookies.set('usertoken', usr.accessToken)
+        $cookies.set('userid', user.id)
+        $cookies.set('useremail', user.email)
       })
       .catch((error) => {
+        isErrorLogin.value = true;
         console.log('error', error)
       })
   }
@@ -48,12 +46,12 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         user.id = usr.uid
         user.email = usr.email
 
-        // get user
-        getUserData(user.id)
-          .then((data) => console.log('data firestore', data))
-          .catch(() => consoel.log('no search...'))
+        $cookies.set('usertoken', usr.accessToken)
+        $cookies.set('userid', user.id)
+        $cookies.set('useremail', user.email)
       })
       .catch((error) => {
+        isErrorLogin.value = true;
         console.log('error', error)
       })
   }
@@ -61,8 +59,12 @@ export const useUserInfo = defineStore('useUserInfo', () => {
   const setSignOut = () => {
     signOut(auth)
       .then(() => {
-        user.id = undefined
-        user.name = undefined
+        user.id = null
+        user.name = null
+        token.value = null
+        $cookies.remove('usertoken')
+        $cookies.remove('userid')
+        $cookies.remove('useremail')
       })
       .catch((err) => {
         console.log(err)
@@ -74,79 +76,23 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     provider.setCustomParameters({
       prompt: 'select_account'
     })
-    await signInWithPopup(auth, provider).then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-      user.id = result.user.uid
-      user.email = result.user.email
+    try {
+      await signInWithPopup(auth, provider).then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential.accessToken
+        user.id = result.user.uid
+        user.email = result.user.email
 
-      getUserData(user.id)
-        .then((data) => {
-          if (data === null) {
-            addDocument(user.id, {
-              name: 'juanjo',
-              middleName: 'romero',
-              lastName: 'ramos',
-              email: user.email
-            })
-          } else {
-            console.log('data', data)
-            console.log('id', user.id)
-          }
-        })
-        .catch((err) => {
-          consoel.log('err', err)
-        })
-    })
+        $cookies.set('usertoken', token)
+        $cookies.set('userid', user.id)
+        $cookies.set('useremail', user.email)
+      })
+    } catch (err) {
+      isErrorLogin.value = true;
+      console.log(err)
+    }
   }
 
-  // const  setSignInGoogle = async () => {
-  //   const auth = getAuth()
-  //   const provider = new GoogleAuthProvider()
-  //    provider.addScope('profile');
-  //   provider.addScope('email');
-  //   provider.addScope('https://www.googleapis.com/auth/contacts.readonly'); // solicitar permisos a oauth
-
-  //   console.log('route', router.currentRoute.value.name)
-
-  //   signInWithRedirect(auth, provider)
-
-  //   const signWith = () => {
-  //     return new Promise((resolve, reject) => {
-  //       signInWithRedirect(auth, provider)
-  //         .then(() => {
-  //           No resolver aquí porque el redireccionamiento aún no ha ocurrido.
-  //           console.log('Redireccionando a Google para autenticación...');
-  //         })
-  //         .catch(reject);
-  //     });
-  //   };
-
-  //   signWith()
-  //   .then(() => {
-  //     getRedirectResult(auth)
-  //     .then((result) => {
-  //       const credential = GoogleAuthProvider.credentialFromResult(result)
-  //       console.log('credential', credential)
-
-  //       const token = credential.accessToken
-  //       console.log('token', token)
-
-  //       const user = result.user
-  //        console.log('user', user)
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code
-  //       const errorMessage = error.message
-  //       const email = error.customData.email
-  //       const credential = GoogleAuthProvider.credentialFromError(error)
-  //     })
-
-  //   })
-  //   .catch((err) => new Error(`erro en la promesa ${err}`))
-  // }
-
-  //  console.log('route', router.currentRoute.value.name)
-
-  return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, isLogin }
+  return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, isLogin, isErrorLogin }
 })
+
