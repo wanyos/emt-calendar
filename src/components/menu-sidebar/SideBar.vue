@@ -8,7 +8,7 @@
   <div class="div__menu">
     <LayoutSideBar :data-menu="getComponents" class="layout__side-bar"> </LayoutSideBar>
 
-    <!-- <button @click="getDepartures()"> Pedir APi </button> -->
+    <button @click="getDepartures()"> Pedir APi </button>
 
     <Item v-if="userStore.isLogin" class="item" :svg="report" title="Juan Jose Romero" subtitle="juan@romero.com" />
   </div>
@@ -26,7 +26,7 @@ import { useUserInfo } from '@/stores/userInfoStore.js'
 import Button from '@/components/global-components/Button.vue'
 import Item from '@/components/global-components/Item.vue'
 import report from '@/assets/img/report.svg'
-// import DeparturesApi from '@/api/departuresApi.js'
+import DeparturesApi from '@/api/departuresApi.js'
 
 const route = useRoute()
 const userStore = useUserInfo();
@@ -40,11 +40,11 @@ const objComponents = {
 
 const getComponents = computed(() => objComponents[route.name])
 
-// const getDepartures = async () => {
-//   const token = $cookies.get('usertoken')
-//    const dp = await DeparturesApi.getAllDepartures(token);
-//    console.log('res', dp);
-// }
+const getDepartures = async () => {
+  const token = $cookies.get('usertoken')
+   const dp = await DeparturesApi.getAllDepartures(token);
+   console.log('res', dp);
+}
 
 
 </script>
