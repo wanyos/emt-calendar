@@ -10,11 +10,14 @@ import {
   signInWithPopup
 } from '@/firebase/firebaseConfig'
 import User from '@/models/user'
+import { useRouter } from 'vue-router'
+import { nextTick } from 'vue'
 
 export const useUserInfo = defineStore('useUserInfo', () => {
+  const router = useRouter()
   const user = reactive(new User())
   const token = ref('')
-  const isErrorLogin = ref(false);
+  const isErrorLogin = ref(false)
 
   token.value = $cookies.get('usertoken')
   user.id = $cookies.get('userid')
@@ -34,7 +37,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         $cookies.set('useremail', user.email)
       })
       .catch((error) => {
-        isErrorLogin.value = true;
+        isErrorLogin.value = true
         console.log('error', error)
       })
   }
@@ -51,7 +54,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         $cookies.set('useremail', user.email)
       })
       .catch((error) => {
-        isErrorLogin.value = true;
+        isErrorLogin.value = true
         console.log('error', error)
       })
   }
@@ -65,6 +68,9 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         $cookies.remove('usertoken')
         $cookies.remove('userid')
         $cookies.remove('useremail')
+        nextTick(() => {
+          router.push({ name: 'Report' })
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -88,11 +94,10 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         $cookies.set('useremail', user.email)
       })
     } catch (err) {
-      isErrorLogin.value = true;
+      isErrorLogin.value = true
       console.log(err)
     }
   }
 
   return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, isLogin, isErrorLogin }
 })
-

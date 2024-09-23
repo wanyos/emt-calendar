@@ -1,21 +1,36 @@
-
 <template>
-
   <div class="div__report">
-    <Button type="router-link" :to="{ name: 'Report' }" text="Report" custom-class="px-12 py-2" />
+    <Button
+      v-if="$route.name !== 'Report'"
+      type="router-link"
+      :to="{ name: 'Report' }"
+      text="Report"
+      custom-class="flex justify-center items-center px-8 py-1"
+      custom-class-text="ml-2"
+    >
+      <template #iconLeading>
+        <v-icon name="bi-arrow-left" scale="1.5" animation="pulse" />
+      </template>
+    </Button>
   </div>
 
   <div class="div__menu">
     <LayoutSideBar :data-menu="getComponents" class="layout__side-bar"> </LayoutSideBar>
 
-    <!-- <button @click="getDepartures()"> Pedir APi </button> -->
+    <button @click="getDepartures()">Pedir APi</button>
 
-    <Item v-if="userStore.isLogin" class="item" :svg="report" title="Juan Jose Romero" subtitle="juan@romero.com" />
+    <Item
+      v-if="userStore.isLogin"
+      class="item"
+      :svg="report"
+      title="Juan Jose Romero"
+      subtitle="juan@romero.com"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, h } from 'vue'
 import LayoutSideBar from '@/layouts/LayoutSideBar.vue'
 import MainMenu from '@/components/menu-sidebar/MainMenu.vue'
 import MenuCalendar from '@/components/menu-sidebar/MenuCalendar.vue'
@@ -26,10 +41,10 @@ import { useUserInfo } from '@/stores/userInfoStore.js'
 import Button from '@/components/global-components/Button.vue'
 import Item from '@/components/global-components/Item.vue'
 import report from '@/assets/img/report.svg'
-// import DeparturesApi from '@/api/departuresApi.js'
+import DeparturesApi from '@/api/departuresApi.js'
 
 const route = useRoute()
-const userStore = useUserInfo();
+const userStore = useUserInfo()
 
 const objComponents = {
   'Report': MainMenu,
@@ -40,13 +55,13 @@ const objComponents = {
 
 const getComponents = computed(() => objComponents[route.name])
 
-// const getDepartures = async () => {
-//   const token = $cookies.get('usertoken')
-//    const dp = await DeparturesApi.getAllDepartures(token);
-//    console.log('res', dp);
-// }
-
-
+const getDepartures = async () => {
+  // eslint-disable-next-line no-undef
+  const token = $cookies.get('usertoken')
+  const dp = await DeparturesApi.getAllDepartures(token)
+  // eslint-disable-next-line no-undef
+  console.log('res', dp)
+}
 </script>
 
 <style lang="css" scoped>
@@ -67,6 +82,6 @@ const getComponents = computed(() => objComponents[route.name])
 }
 
 .item {
- padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 </style>

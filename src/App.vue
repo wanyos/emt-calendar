@@ -4,10 +4,10 @@
       <section class="section-messages">
         <div class="section__messages-title">
           <div v-if="$route.name === 'Calendar'">
-            <ItemInfo class="mx-1" title="Type:" :message="getType" />
-            <ItemInfo class="mx-1" title="Group:" :message="getGroup" />
-            <ItemInfo class="mx-1" title="Subgroup:" :message="getSubgroup" />
-            <ItemInfo class="mx-1" title="Year:" :message="getYear" />
+            <ItemInfo class="mx-2" title="Type:" :message="getType" />
+            <ItemInfo class="mx-2" title="Group:" :message="getGroup" />
+            <ItemInfo class="mx-2" title="Subgroup:" :message="getSubgroup" />
+            <ItemInfo class="mx-2" title="Year:" :message="getYear" />
           </div>
         </div>
       </section>
@@ -16,7 +16,7 @@
 
     <aside class="aside">
       <section class="aside__brand">
-        <Icon :img-url="logo" size="w-10 h-10 rounded-xl" />
+        <v-icon :name="getNameIcon" scale="2" />
         <div class="section__messages-route">
           <p>{{ $route.name }}</p>
         </div>
@@ -40,8 +40,8 @@
 </template>
 
 <script setup>
-import Icon from '@/components/icons/Icon.vue'
-import logo from '@/assets/logo.ico'
+// import Icon from '@/components/icons/Icon.vue'
+// import logo from '@/assets/logo.ico'
 import SideBar from '@/components/menu-sidebar/SideBar.vue'
 import Login from '@/components/login/Login.vue'
 import Modal from '@/components/modals/Modal.vue'
@@ -49,10 +49,25 @@ import ItemInfo from '@/components/global-components/ItemInfo.vue'
 import { useModal } from '@/stores/modalStore.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore.js'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const modalStore = useModal()
 const optionCalendarStore = useOptionsCalendarStore()
 const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarStore)
+
+const router = useRoute()
+
+const getNameIcon = computed(() => {
+  // console.log('rouer', router.fullPath)
+  // console.log('name', router.name)
+  if (router.name === 'Report') {
+    return 'md-calendarmonth-twotone'
+  } else if (router.name === 'Calendar') {
+    return 'md-calendarmonth-twotone'
+  }
+  // return 'md-calendarmonth-twotone'
+})
 </script>
 
 <style scoped>
@@ -74,7 +89,7 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
 
 .section__messages-route p {
   font-size: large;
-  color: rgb(0, 0, 0);
+  color: var(--ntp-logo-color);
   text-align: center;
   padding: 0 15px;
   width: 9em;
