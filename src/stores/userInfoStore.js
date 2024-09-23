@@ -5,6 +5,7 @@ import {
   auth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  OAuthProvider,
   signInWithEmailAndPassword,
   signOut,
   signInWithPopup
@@ -99,5 +100,23 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     }
   }
 
-  return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, isLogin, isErrorLogin }
+
+  const setSignInMicrosoft = async () => {
+    const microsoftProvider = new OAuthProvider('microsoft.com');
+    try {
+      await signInWithPopup(auth, microsoftProvider).then((result) => {
+        const credential = OAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        const user = result.user;
+        console.log('Usuario autenticado con Microsoft:', user);
+        console.log('Usuario autenticado con Microsoft:', credential);
+        console.log('Usuario autenticado con Microsoft:', accessToken);
+      })
+    } catch(err) {
+      console.error('Error al iniciar sesión con Microsoft:', error);
+    }  
+  };
+
+
+  return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, setSignInMicrosoft, isLogin, isErrorLogin }
 })

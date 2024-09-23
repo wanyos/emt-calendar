@@ -7,9 +7,9 @@ import router from './router'
 import VueCookies from 'vue-cookies'
 import Emitter from 'tiny-emitter'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone } from 'oh-vue-icons/icons'
+import { BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone, LaCalendarDaySolid, RiSettings5Line, SiAffinityphoto } from 'oh-vue-icons/icons'
 
-addIcons(BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone)
+addIcons(BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone, LaCalendarDaySolid, RiSettings5Line, SiAffinityphoto)
 
 const app = createApp(App)
 

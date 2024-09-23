@@ -58,15 +58,19 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
 
 const router = useRoute()
 
-const getNameIcon = computed(() => {
-  // console.log('rouer', router.fullPath)
-  // console.log('name', router.name)
-  if (router.name === 'Report') {
-    return 'md-calendarmonth-twotone'
-  } else if (router.name === 'Calendar') {
-    return 'md-calendarmonth-twotone'
-  }
-  // return 'md-calendarmonth-twotone'
+const getNameIcon = computed(() => { 
+  switch (router.name) {
+        case 'Report':
+          return 'si-affinityphoto';
+        case 'Calendar':
+          return 'md-calendarmonth-twotone';
+        case 'My Calendar':
+          return 'la-calendar-day-solid';
+          case 'Settings':
+            return 'ri-settings-5-line';
+        default:
+          return 'si-affinityphoto';
+      }
 })
 </script>
 

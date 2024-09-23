@@ -71,7 +71,7 @@ const props = defineProps({
 
 const { closeModal } = useModal()
 const userInfo = useUserInfo()
-const { setSignUp, setSignIn, setSignInGoogle } = useUserInfo()
+const { setSignUp, setSignIn, setSignInGoogle, setSignInMicrosoft } = useUserInfo()
 
 const email = ref('')
 const password = ref('')
@@ -110,7 +110,11 @@ const login = async () => {
   props.title === 'SignUp' ? await setSignUp(email, password) : await setSignIn(email, password)
 }
 const loginGoogle = () => {
-  setSignInGoogle()
+  setSignInGoogle();
+}
+
+const loginMicrosoft = () => {
+  setSignInMicrosoft();
 }
 
 // const loginMicrosoft = async () => {
