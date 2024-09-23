@@ -1,13 +1,40 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
- :root {
+:root {
+  --color-ref-primary10: #001b3eff;
+  --color-ref-primary20: #002f64ff;
+  --color-ref-primary25: #0f3b72ff;
+  --color-ref-primary30: #1f467eff;
+  --color-ref-primary40: #3a5e98ff;
+  --color-ref-primary50: #5477b2ff;
+  --color-ref-primary60: #6f91ceff;
+  --color-ref-primary70: #89aceaff;
+  --color-ref-primary80: #aac7ffff;
+  --color-ref-primary90: #d6e3ffff;
+
+  --color-ref-secondary10: #131c2bff;
+  --color-ref-secondary12: #172030ff;
+  --color-ref-secondary15: #1d2636ff;
+  --color-ref-secondary20: #283141ff;
+  --color-ref-secondary25: #333c4dff;
+  --color-ref-secondary30: #3e4759ff;
+  --color-ref-secondary35: #4a5365ff;
+  --color-ref-secondary40: #565f71ff;
+  --color-ref-secondary50: #6e778aff;
+  --color-ref-secondary60: #8891a5ff;
+  --color-ref-secondary70: #a2abc0ff;
+  --color-ref-secondary80: #bec6dcff;
+  --color-ref-secondary90: #dae2f9ff;
+
+  --ntp-logo-color: rgba(170, 199, 255, 1);
+
   --main-background: rgba(87, 83, 83, 0.5);
   --button-background: rgba(0, 0, 0, 0.9);
   --month-background: rgba(0, 0, 0, 0.9);
-  --second-background: rgba(70, 65, 65);
+  /* --second-background: rgba(70, 65, 65); */
+  --second-background: var(--color-ref-primary10);
   --border-main: rgb(88, 201, 224);
 }
 
@@ -17,14 +44,15 @@
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
   font-weight: 600;
-  color: white;
+  color: var(--ntp-logo-color);
   font-size: 1rem;
 }
 
 html {
-  background-image: url('https://img.freepik.com/fotos-premium/fondo-textura-hoja-plata_653449-8162.jpg');
+  background-color: var(--color-ref-primary10);
+  /* background-image: url('https://img.freepik.com/fotos-premium/fondo-textura-hoja-plata_653449-8162.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 
 /* @layer base {
@@ -35,6 +63,3 @@ html {
       @apply hover:cursor-not-allowed;
   }
 } */
-
-
-

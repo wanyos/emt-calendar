@@ -52,7 +52,15 @@
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore'
 import { useUserInfo } from '@/stores/userInfoStore'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import { PublicClientApplication } from '@azure/msal-browser'
+import AzureService from '../../firebase/azureService'
+
+// onMounted(() => {
+//   const azureService = new AzureService()
+//   // eslint-disable-next-line no-undef
+//   $msalInstance = new PublicClientApplication(azureService.getMsalConfig().value)
+// })
 
 const props = defineProps({
   title: {
@@ -68,6 +76,7 @@ const { setSignUp, setSignIn, setSignInGoogle } = useUserInfo()
 const email = ref('')
 const password = ref('')
 const closeError = ref(false)
+// const account = ''
 
 watch(
   () => userInfo.isLogin,
@@ -104,9 +113,21 @@ const loginGoogle = () => {
   setSignInGoogle()
 }
 
-const loginMicrosoft = () => {
-   
-}
+// const loginMicrosoft = async () => {
+//   await this.$msalInstance
+//     .loginPopup({})
+//     .then(() => {
+//       // eslint-disable-next-line no-undef
+//       const myAccounts = $msalInstance.getAllAccounts()
+//       account = myAccounts[0]
+//       // eslint-disable-next-line no-undef
+//       $emitter.emit('login', account)
+//     })
+//     .catch((err) => {
+//       // eslint-disable-next-line no-undef
+//       console.log('error in microsoft login', err)
+//     })
+// }
 </script>
 
 <style lang="css" scoped>
@@ -167,7 +188,7 @@ const loginMicrosoft = () => {
   border: none;
   border-bottom: 2px solid #fff;
   color: #fff;
-  background: #3d3a3a;
+  background: var(--second-background);
   outline: none;
 }
 

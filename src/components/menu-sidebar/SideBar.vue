@@ -1,8 +1,17 @@
-
 <template>
-
   <div class="div__report">
-    <Button type="router-link" :to="{ name: 'Report' }" text="Report" custom-class="px-12 py-2" />
+    <Button
+      v-if="$route.name !== 'Report'"
+      type="router-link"
+      :to="{ name: 'Report' }"
+      text="Report"
+      custom-class="flex justify-center items-center px-8 py-1"
+      custom-class-text="ml-2"
+    >
+      <template #iconLeading>
+        <v-icon name="bi-arrow-left" scale="1.5" animation="pulse" />
+      </template>
+    </Button>
   </div>
 
   <div class="div__menu">
@@ -10,12 +19,18 @@
 
     <button @click="getDepartures()"> Pedir APi </button>
 
-    <Item v-if="userStore.isLogin" class="item" :svg="report" title="Juan Jose Romero" subtitle="juan@romero.com" />
+    <Item
+      v-if="userStore.isLogin"
+      class="item"
+      :svg="report"
+      title="Juan Jose Romero"
+      subtitle="juan@romero.com"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, h } from 'vue'
 import LayoutSideBar from '@/layouts/LayoutSideBar.vue'
 import MainMenu from '@/components/menu-sidebar/MainMenu.vue'
 import MenuCalendar from '@/components/menu-sidebar/MenuCalendar.vue'
@@ -29,7 +44,7 @@ import report from '@/assets/img/report.svg'
 import DeparturesApi from '@/api/departuresApi.js'
 
 const route = useRoute()
-const userStore = useUserInfo();
+const userStore = useUserInfo()
 
 const objComponents = {
   'Report': MainMenu,
@@ -67,6 +82,6 @@ const getDepartures = async () => {
 }
 
 .item {
- padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 </style>

@@ -124,64 +124,21 @@ const labelClasses = (value) => {
   return classes.value
 }
 
-// const typeCalendarConfig = {
-//   'Conductor': {
-//     group: constants.groupFive,
-//     sub: constants.subH,
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   },
-//   'Conductor-Buho': {
-//     group: constants.groupFive,
-//     sub: constants.subH,
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   },
-//   'GruaDSM-Noche': { group: constants.groupThree, showRefuerzo: false, showSubgroup: false },
-//   'ParkingDSM-100': { group: constants.groupTen, showRefuerzo: false, showSubgroup: false },
-//   'ParkingDSM-50': { group: constants.groupTwelve, showRefuerzo: false, showSubgroup: false },
-//   'Refuerzo-Nocturno': { group: constants.groupTwo, showRefuerzo: true, showSubgroup: false },
-//   'GruaDSM': {
-//     group: constants.groupFive,
-//     sub: getArrayGruaDSM(selectGroup.value),
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   },
-//   'Inspector': {
-//     group: constants.groupFive,
-//     sub: constants.subJ,
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   },
-//   'Inspector-Noche': {
-//     group: constants.groupFive,
-//     sub: constants.subJ,
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   },
-//   'Grua': {
-//     group: constants.groupFive,
-//     sub: constants.subC,
-//     showRefuerzo: false,
-//     showSubgroup: true
-//   }
-// }
-
 /**
  * Existen 50 subgrupos, dependiendo de la seleccion del select grupo
  * se calculan el resto para incluirlos en el select de subgrupo
  * @param {*} select_value
  */
-function getArrayGruaDSM(selectValue) {
-  const array = []
-  let valor = parseInt(selectValue)
-  array.push(valor) // hay que incluir como primer número el mismo que el grupo
-  for (let a = 0; a < 9; a++) {
-    valor += 5
-    array.push(valor.toString())
-  }
-  return array
-}
+// function getArrayGruaDSM(selectValue) {
+//   const array = []
+//   let valor = parseInt(selectValue)
+//   array.push(valor) // hay que incluir como primer número el mismo que el grupo
+//   for (let a = 0; a < 9; a++) {
+//     valor += 5
+//     array.push(valor.toString())
+//   }
+//   return array
+// }
 
 const submitForm = () => {
   const opt = {
@@ -217,7 +174,6 @@ const submitForm = () => {
 }
 
 .form__div select:hover {
- 
 }
 
 .form__div-button {
@@ -239,9 +195,5 @@ const submitForm = () => {
 .section__div-radio select {
   margin-left: 7px;
   font-size: 15px;
-}
-
-option {
-  cursor: pointer;
 }
 </style>

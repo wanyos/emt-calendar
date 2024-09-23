@@ -8,9 +8,13 @@
       :disabled="props.state"
       class="button"
     >
-      <component :is="iconLeading"></component>
-      {{ props.text }}
-      <component :is="iconTrailing"></component>
+      <component :is="props.iconLeading" />
+      <slot name="iconLeading"></slot>
+      <span :class="props.customClassText">
+        {{ props.text }}
+      </span>
+      <slot name="iconTrailing"></slot>
+      <component :is="props.iconTrailing" />
     </component>
   </div>
 </template>
@@ -48,6 +52,10 @@ const props = defineProps({
   iconTrailing: {
     type: [Object, Function],
     default: () => {}
+  },
+  customClassText: {
+    type: String,
+    default: ''
   }
 })
 </script>
@@ -57,7 +65,6 @@ const props = defineProps({
   cursor: pointer;
   border: 1px solid var(--border-main);
   border-radius: 10px;
-  text-align: center;
   background-color: var(--button-background);
 }
 

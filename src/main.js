@@ -6,15 +6,20 @@ import App from './App.vue'
 import router from './router'
 import VueCookies from 'vue-cookies'
 import Emitter from 'tiny-emitter'
+import { OhVueIcon, addIcons } from 'oh-vue-icons'
+import { BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone } from 'oh-vue-icons/icons'
+
+addIcons(BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone)
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(VueCookies, {
-    expires: '1d',
-    path: '/'
+  expires: '1d',
+  path: '/'
 })
+app.component('v-icon', OhVueIcon)
 
 // azure config
 app.config.globalProperties.$msalInstance = {}
