@@ -52,15 +52,7 @@
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore'
 import { useUserInfo } from '@/stores/userInfoStore'
-import { ref, watch, onMounted } from 'vue'
-import { PublicClientApplication } from '@azure/msal-browser'
-import AzureService from '../../firebase/azureService'
-
-// onMounted(() => {
-//   const azureService = new AzureService()
-//   // eslint-disable-next-line no-undef
-//   $msalInstance = new PublicClientApplication(azureService.getMsalConfig().value)
-// })
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   title: {
@@ -76,7 +68,6 @@ const { setSignUp, setSignIn, setSignInGoogle, setSignInMicrosoft } = useUserInf
 const email = ref('')
 const password = ref('')
 const closeError = ref(false)
-// const account = ''
 
 watch(
   () => userInfo.isLogin,
@@ -110,28 +101,12 @@ const login = async () => {
   props.title === 'SignUp' ? await setSignUp(email, password) : await setSignIn(email, password)
 }
 const loginGoogle = () => {
-  setSignInGoogle();
+  setSignInGoogle()
 }
 
 const loginMicrosoft = () => {
-  setSignInMicrosoft();
+  setSignInMicrosoft()
 }
-
-// const loginMicrosoft = async () => {
-//   await this.$msalInstance
-//     .loginPopup({})
-//     .then(() => {
-//       // eslint-disable-next-line no-undef
-//       const myAccounts = $msalInstance.getAllAccounts()
-//       account = myAccounts[0]
-//       // eslint-disable-next-line no-undef
-//       $emitter.emit('login', account)
-//     })
-//     .catch((err) => {
-//       // eslint-disable-next-line no-undef
-//       console.log('error in microsoft login', err)
-//     })
-// }
 </script>
 
 <style lang="css" scoped>

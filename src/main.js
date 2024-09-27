@@ -5,11 +5,26 @@ import './assets/main.css'
 import App from './App.vue'
 import router from './router'
 import VueCookies from 'vue-cookies'
-import Emitter from 'tiny-emitter'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-import { BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone, LaCalendarDaySolid, RiSettings5Line, SiAffinityphoto } from 'oh-vue-icons/icons'
+import {
+  BiArrowLeft,
+  PrAngleDoubleLeft,
+  MdCalendarmonthTwotone,
+  LaCalendarDaySolid,
+  RiSettings5Line,
+  SiAffinityphoto,
+  PrCircleOn
+} from 'oh-vue-icons/icons'
 
-addIcons(BiArrowLeft, PrAngleDoubleLeft, MdCalendarmonthTwotone, LaCalendarDaySolid, RiSettings5Line, SiAffinityphoto)
+addIcons(
+  BiArrowLeft,
+  PrAngleDoubleLeft,
+  MdCalendarmonthTwotone,
+  LaCalendarDaySolid,
+  RiSettings5Line,
+  SiAffinityphoto,
+  PrCircleOn
+)
 
 const app = createApp(App)
 
@@ -20,9 +35,5 @@ app.use(VueCookies, {
   path: '/'
 })
 app.component('v-icon', OhVueIcon)
-
-// azure config
-app.config.globalProperties.$msalInstance = {}
-app.config.globalProperties.$emitter = new Emitter()
 
 app.mount('#app')

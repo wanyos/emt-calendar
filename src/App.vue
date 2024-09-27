@@ -3,12 +3,12 @@
     <header class="header">
       <section class="section-messages">
         <div class="section__messages-title">
-          <div v-if="$route.name === 'Calendar'">
+          <!-- <div v-if="$route.name === 'Calendar'">
             <ItemInfo class="mx-2" title="Type:" :message="getType" />
             <ItemInfo class="mx-2" title="Group:" :message="getGroup" />
             <ItemInfo class="mx-2" title="Subgroup:" :message="getSubgroup" />
             <ItemInfo class="mx-2" title="Year:" :message="getYear" />
-          </div>
+          </div> -->
         </div>
       </section>
       <Login />
@@ -58,19 +58,19 @@ const { getYear, getType, getGroup, getSubgroup } = storeToRefs(optionCalendarSt
 
 const router = useRoute()
 
-const getNameIcon = computed(() => { 
+const getNameIcon = computed(() => {
   switch (router.name) {
-        case 'Report':
-          return 'si-affinityphoto';
-        case 'Calendar':
-          return 'md-calendarmonth-twotone';
-        case 'My Calendar':
-          return 'la-calendar-day-solid';
-          case 'Settings':
-            return 'ri-settings-5-line';
-        default:
-          return 'si-affinityphoto';
-      }
+    case 'Report':
+      return 'si-affinityphoto'
+    case 'Calendar':
+      return 'md-calendarmonth-twotone'
+    case 'My Calendar':
+      return 'la-calendar-day-solid'
+    case 'Settings':
+      return 'ri-settings-5-line'
+    default:
+      return 'si-affinityphoto'
+  }
 })
 </script>
 

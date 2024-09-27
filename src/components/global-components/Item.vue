@@ -1,21 +1,16 @@
 <template>
   <section class="section__main">
-    <Icon :img-url="props.svg" />
+    <slot name="iconLeading"></slot>
     <div class="title">
       <p class="text-lg">{{ props.title }}</p>
       <p class="text-base">{{ props.subtitle }}</p>
     </div>
+    <slot name="iconTrailing"></slot>
   </section>
 </template>
 
 <script setup>
-import Icon from '@/components/icons/Icon.vue'
-
 const props = defineProps({
-  svg: {
-    type: String,
-    default: ''
-  },
   title: {
     type: String,
     default: ''
@@ -23,6 +18,14 @@ const props = defineProps({
   subtitle: {
     type: String,
     default: ''
+  },
+  iconLeading: {
+    type: [Object, Function],
+    default: () => {}
+  },
+  iconTrailing: {
+    type: [Object, Function],
+    default: () => {}
   }
 })
 </script>
@@ -33,5 +36,4 @@ const props = defineProps({
   justify-content: space-evenly;
   align-items: center;
 }
-
 </style>

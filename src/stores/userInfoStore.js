@@ -100,23 +100,44 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     }
   }
 
-
   const setSignInMicrosoft = async () => {
-    const microsoftProvider = new OAuthProvider('microsoft.com');
+    const microsoftProvider = new OAuthProvider('microsoft.com')
+
     try {
       await signInWithPopup(auth, microsoftProvider).then((result) => {
-        const credential = OAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        const user = result.user;
-        console.log('Usuario autenticado con Microsoft:', user);
-        console.log('Usuario autenticado con Microsoft:', credential);
-        console.log('Usuario autenticado con Microsoft:', accessToken);
+        const credential = OAuthProvider.credentialFromResult(result)
+        const accessToken = credential.accessToken
+        const idToken = credential.idToken
+        console.log('Usuario autenticado con Microsoft:', credential)
+        console.log('Usuario autenticado con Microsoft:', accessToken)
+        console.log('Usuario autenticado con Microsoft:', idToken)
       })
-    } catch(err) {
-      console.error('Error al iniciar sesión con Microsoft:', error);
-    }  
-  };
+    } catch (err) {
+      console.error('Error al iniciar sesión con Microsoft:', error)
+    }
 
+    // try {
+    //   await signInWithPopup(auth, microsoftProvider).then((result) => {
+    //     const credential = OAuthProvider.credentialFromResult(result);
+    //     const accessToken = credential.accessToken;
+    //     const user = result.user;
+    //     console.log('Usuario autenticado con Microsoft:', user);
+    //     console.log('Usuario autenticado con Microsoft:', credential);
+    //     console.log('Usuario autenticado con Microsoft:', accessToken);
+    //   })
+    // } catch(err) {
+    //   console.error('Error al iniciar sesión con Microsoft:', error);
+    // }
+  }
 
-  return { user, setSignOut, setSignUp, setSignIn, setSignInGoogle, setSignInMicrosoft, isLogin, isErrorLogin }
+  return {
+    user,
+    setSignOut,
+    setSignUp,
+    setSignIn,
+    setSignInGoogle,
+    setSignInMicrosoft,
+    isLogin,
+    isErrorLogin
+  }
 })
