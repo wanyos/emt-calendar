@@ -5,7 +5,7 @@
         <div class="section__modal-div">
           <section class="section__header">
             <label>{{ props.title }}</label>
-            <button @click="closeModal">X</button>
+            <button @click="closeModal()">X</button>
           </section>
 
           <section class="section__form">
@@ -17,13 +17,14 @@
                   v-model="email"
                   type="email"
                   name="user"
-                  autocomplete="off"
+                  placeholder="email..."
+                  autocomplete="username"
                 />
               </div>
 
               <div class="form__div">
                 <label for="password">Password</label>
-                <input @focus="password = ''" v-model="password" type="password" name="password" />
+                <input @focus="password = ''" v-model="password" type="password" name="password" placeholder="password" autocomplete="current-password" />
               </div>
 
               <div class="div__button">
@@ -37,7 +38,7 @@
                 </button>
               </div>
 
-              <div v-if="userInfo.isErrorLogin && !closeError" class="div__error">
+              <div v-if="!showError" class="div__error">
                 <p>There was an error while logging in...</p>
               </div>
             </form>
@@ -52,7 +53,7 @@
 import Modal from '@/components/modals/Modal.vue'
 import { useModal } from '@/stores/modalStore'
 import { useUserInfo } from '@/stores/userInfoStore'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 const props = defineProps({
   title: {
@@ -67,13 +68,17 @@ const { setSignUp, setSignIn, setSignInGoogle, setSignInMicrosoft } = useUserInf
 
 const email = ref('')
 const password = ref('')
-const closeError = ref(false)
+const showError = ref(false)
+
+onMounted(() => {
+  showError.value = true;
+});
 
 watch(
   () => userInfo.isLogin,
   (newVal) => {
     if (newVal) {
-      closeModal()
+        closeModal();
     }
   }
 )
@@ -82,7 +87,7 @@ watch(
   () => email.value,
   (newVal, oldVal) => {
     if (newVal === '' && oldVal !== '' && userInfo.isErrorLogin) {
-      closeError.value = true
+      showError.value = true
     }
   }
 )
@@ -91,13 +96,13 @@ watch(
   () => password.value,
   (newVal, oldVal) => {
     if (newVal === '' && oldVal !== '' && userInfo.isErrorLogin) {
-      closeError.value = true
+      showError.value = true
     }
   }
 )
 
 const login = async () => {
-  closeError.value = false
+  showError.value = false
   props.title === 'SignUp' ? await setSignUp(email, password) : await setSignIn(email, password)
 }
 const loginGoogle = () => {

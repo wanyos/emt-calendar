@@ -33,9 +33,15 @@
   --main-background: rgba(87, 83, 83, 0.5);
   --button-background: rgba(0, 0, 0, 0.9);
   --month-background: rgba(0, 0, 0, 0.9);
-  /* --second-background: rgba(70, 65, 65); */
   --second-background: var(--color-ref-primary10);
   --border-main: rgb(88, 201, 224);
+
+  --color-free-day: #7bee21;
+  --color-free-subgroup: #17bbeb;
+  --color-free-groups_aceg: #dbee17;
+  --color-free-groups_bdfh: #eb9e17;
+  --color-free-reduction: #3a17eb;
+  --color-free-partial: #b2c7cf;
 }
 
 * {

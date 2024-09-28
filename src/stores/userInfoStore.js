@@ -39,7 +39,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       })
       .catch((error) => {
         isErrorLogin.value = true
-        console.log('error', error)
+        // console.log('error', error)
       })
   }
 
@@ -56,7 +56,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       })
       .catch((error) => {
         isErrorLogin.value = true
-        console.log('error', error)
+        // console.log('error', error)
       })
   }
 
@@ -96,38 +96,28 @@ export const useUserInfo = defineStore('useUserInfo', () => {
       })
     } catch (err) {
       isErrorLogin.value = true
-      console.log(err)
+      // console.log(err)
     }
   }
 
   const setSignInMicrosoft = async () => {
     const microsoftProvider = new OAuthProvider('microsoft.com')
-
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    })
     try {
       await signInWithPopup(auth, microsoftProvider).then((result) => {
         const credential = OAuthProvider.credentialFromResult(result)
-        const accessToken = credential.accessToken
-        const idToken = credential.idToken
-        console.log('Usuario autenticado con Microsoft:', credential)
-        console.log('Usuario autenticado con Microsoft:', accessToken)
-        console.log('Usuario autenticado con Microsoft:', idToken)
+        const userInfo =  result.user
+
+        $cookies.set('usertoken', credential.accessToken);
+        $cookies.set('userid', userInfo.uid)
+        $cookies.set('useremail', userInfo.email)
       })
     } catch (err) {
-      console.error('Error al iniciar sesión con Microsoft:', error)
+      isErrorLogin.value = true
+      // console.log('error', erro)
     }
-
-    // try {
-    //   await signInWithPopup(auth, microsoftProvider).then((result) => {
-    //     const credential = OAuthProvider.credentialFromResult(result);
-    //     const accessToken = credential.accessToken;
-    //     const user = result.user;
-    //     console.log('Usuario autenticado con Microsoft:', user);
-    //     console.log('Usuario autenticado con Microsoft:', credential);
-    //     console.log('Usuario autenticado con Microsoft:', accessToken);
-    //   })
-    // } catch(err) {
-    //   console.error('Error al iniciar sesión con Microsoft:', error);
-    // }
   }
 
   return {
