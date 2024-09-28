@@ -102,17 +102,16 @@ export const useUserInfo = defineStore('useUserInfo', () => {
 
   const setSignInMicrosoft = async () => {
     const microsoftProvider = new OAuthProvider('microsoft.com')
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    })
     try {
       await signInWithPopup(auth, microsoftProvider).then((result) => {
         const credential = OAuthProvider.credentialFromResult(result)
-        const userInfo =  result.user
+        const token = credential.accessToken
+        user.id = result.user.uid
+        user.email = result.user.email
 
-        $cookies.set('usertoken', credential.accessToken);
-        $cookies.set('userid', userInfo.uid)
-        $cookies.set('useremail', userInfo.email)
+        $cookies.set('usertoken', token)
+        $cookies.set('userid', user.uid)
+        $cookies.set('useremail', user.email)
       })
     } catch (err) {
       isErrorLogin.value = true

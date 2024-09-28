@@ -24,7 +24,14 @@
 
               <div class="form__div">
                 <label for="password">Password</label>
-                <input @focus="password = ''" v-model="password" type="password" name="password" placeholder="password" autocomplete="current-password" />
+                <input
+                  @focus="password = ''"
+                  v-model="password"
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  autocomplete="current-password"
+                />
               </div>
 
               <div class="div__button">
@@ -71,14 +78,14 @@ const password = ref('')
 const showError = ref(false)
 
 onMounted(() => {
-  showError.value = true;
-});
+  showError.value = true
+})
 
 watch(
   () => userInfo.isLogin,
   (newVal) => {
     if (newVal) {
-        closeModal();
+      closeModal()
     }
   }
 )

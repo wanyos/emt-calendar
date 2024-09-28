@@ -10,8 +10,10 @@ const TYPE_CALENDAR = {
   PARKING_100: 'ParkingDSM-100',
   PARKING_50: 'ParkingDSM-50'
 }
-  
 
+const GROUP_MOTION = ['Conductor', 'Conductor-Buho', 'Inspector', 'Inspector-Noche']
+const GROUP_REDUCTION = ['ParkingDSM-100', 'ParkingDSM-50']
+const GROUP_PARTIAL = ['Grua', 'GruaDSM', 'ParkingDSM-50']
 
 const GROUP_TWO = ['A', 'B']
 const GROUP_THREE = ['1', '2', '3']
@@ -51,5 +53,8 @@ export default {
   SUB_J,
   YEARS,
   SUB_REFUERZO_N,
-  SUB_REFUERZO_L
+  SUB_REFUERZO_L,
+  GROUP_MOTION,
+  GROUP_REDUCTION,
+  GROUP_PARTIAL
 }

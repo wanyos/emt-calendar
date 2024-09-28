@@ -69,15 +69,13 @@
       <Button type="button" text="Search" custom-class="px-4 py-1" @click="submitForm()" />
     </div>
   </form>
-  <p>{{ getOptions }}</p>
 </template>
 
 <script setup>
 import Button from '@/components/global-components/Button.vue'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import constants from '@/constants/dataFormCalendar.js'
 import { useOptionsCalendarStore } from '@/stores/optionCalendarStore'
-import { storeToRefs } from 'pinia'
 
 let nowYear = new Date().getFullYear()
 
@@ -110,12 +108,15 @@ onMounted(() => {
 })
 
 const storeOptions = useOptionsCalendarStore()
-const { getOptions } = storeToRefs(storeOptions)
 const { setOptions } = storeOptions
 
 const showSubgroup = ref(true)
 const showRefuerzo = ref(false)
 const radioSelect = ref('number')
+
+watch(selectTypeCalendar, (newValue) => {
+  storeOptions.setTypeCalendar(newValue)
+})
 
 const labelClasses = (value) => {
   const classes = computed(() => {

@@ -1,10 +1,15 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import constants from '@/constants/dataFormCalendar.js'
 
 export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
   let options = ref({})
+  const calendar_select = ref('')
   let nowYear = new Date().getFullYear()
+
+  const setTypeCalendar = (newValue) => {
+    calendar_select.value = newValue
+  }
 
   const getType = computed(() =>
     options.value.type === undefined ? constants.TYPE_CALENDAR.CONDUCTOR : options.value.type
@@ -28,5 +33,5 @@ export const useOptionsCalendarStore = defineStore('optionsCalendar', () => {
     }
   }
 
-  return { getType, getGroup, getSubgroup, getYear, setOptions }
+  return { getType, getGroup, getSubgroup, getYear, setOptions, setTypeCalendar, calendar_select }
 })
