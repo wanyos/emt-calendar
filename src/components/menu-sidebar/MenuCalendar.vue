@@ -1,73 +1,77 @@
 <template>
   <form class="form" @submit.prevent="submitForm">
-    <div class="form__div">
-      <label for="selectType">Type</label>
-      <select v-model="selectTypeCalendar">
-        <option v-for="(item, index) in calendar" :key="index">
-          {{ item }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form__div">
-      <label for="selectGroup">Group</label>
-      <select v-model="selectGroup">
-        <option v-for="(item, index) in group" :key="index">
-          {{ item }}
-        </option>
-      </select>
-    </div>
-
-    <div v-if="showSubgroup" class="form__div">
-      <label for="selectSub">SubGroup</label>
-      <select v-model="selectSub" name="selectSub">
-        <option v-for="(item, index) in sub" :key="index">
-          {{ item }}
-        </option>
-      </select>
-    </div>
-
-    <section v-if="showRefuerzo" class="form__div">
-      <div class="section__div-radio">
-        <input
-          id="radioN"
-          v-model="radioSelect"
-          type="radio"
-          name="option"
-          value="number"
-          checked
-        />
-        <label for="radioN" :class="labelClasses('number')">Number</label>
-        <select v-model="selectNumber" :disabled="radioSelect === 'letter'">
-          <option v-for="(item, index) in subRefuerzoN" :key="index">
+    <div class="fixed-top">
+      <div class="form__div">
+        <label for="selectType">Type</label>
+        <select v-model="selectTypeCalendar">
+          <option v-for="(item, index) in calendar" :key="index">
             {{ item }}
           </option>
         </select>
       </div>
 
-      <div class="section__div-radio">
-        <input id="radioL" v-model="radioSelect" type="radio" name="option" value="letter" />
-        <label for="radioL" :class="labelClasses('letter')">Letter</label>
-        <select v-model="selectLetter" :disabled="radioSelect === 'number'">
-          <option v-for="(item, index) in subRefuerzoL" :key="index">
+      <div class="form__div">
+        <label for="selectGroup">Group</label>
+        <select v-model="selectGroup">
+          <option v-for="(item, index) in group" :key="index">
             {{ item }}
           </option>
         </select>
       </div>
-    </section>
-
-    <div class="form__div">
-      <label for="selectYear">Year</label>
-      <select v-model="selectYear" name="selectYear">
-        <option v-for="(item, index) in years" :key="index">
-          {{ item }}
-        </option>
-      </select>
     </div>
 
-    <div class="form__div-button">
-      <Button type="button" text="Search" custom-class="px-4 py-1" @click="submitForm()" />
+      <div v-if="showSubgroup" class="form__div">
+        <label for="selectSub">SubGroup</label>
+        <select v-model="selectSub" name="selectSub">
+          <option v-for="(item, index) in sub" :key="index">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+
+      <section v-if="showRefuerzo" class="form__div">
+        <div class="section__div-radio">
+          <input
+            id="radioN"
+            v-model="radioSelect"
+            type="radio"
+            name="option"
+            value="number"
+            checked
+          />
+          <label for="radioN" :class="labelClasses('number')">Number</label>
+          <select v-model="selectNumber" :disabled="radioSelect === 'letter'">
+            <option v-for="(item, index) in subRefuerzoN" :key="index">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+
+        <div class="section__div-radio">
+          <input id="radioL" v-model="radioSelect" type="radio" name="option" value="letter" />
+          <label for="radioL" :class="labelClasses('letter')">Letter</label>
+          <select v-model="selectLetter" :disabled="radioSelect === 'number'">
+            <option v-for="(item, index) in subRefuerzoL" :key="index">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </section>
+
+    <div class="fixed-bottom">
+      <div class="form__div">
+        <label for="selectYear">Year</label>
+        <select v-model="selectYear" name="selectYear">
+          <option v-for="(item, index) in years" :key="index">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <div class="form__div-button">
+        <Button type="button" text="Search" custom-class="px-4 py-1" @click="submitForm()" />
+      </div>
     </div>
+
   </form>
 </template>
 
@@ -107,16 +111,24 @@ onMounted(() => {
   selectYear.value = nowYear
 })
 
-const storeOptions = useOptionsCalendarStore()
-const { setOptions } = storeOptions
-
-const showSubgroup = ref(true)
-const showRefuerzo = ref(false)
+const calendarStore = useOptionsCalendarStore()
 const radioSelect = ref('number')
 
+
 watch(selectTypeCalendar, (newValue) => {
-  storeOptions.setTypeCalendar(newValue)
+  calendarStore.setTypeCalendar(newValue)
 })
+
+const showSubgroup = computed(() => {
+  const validTypes = ['Conductor', 'Conductor-Buho', 'Inspector', 'Inspector-Noche', 'Grua', 'GruaDSM']; 
+  return validTypes.includes(calendarStore.calendar_select); 
+});
+
+const showRefuerzo = computed(() => {
+  const validTypes = ['Refuerzo-Nocturno']; 
+  return validTypes.includes(calendarStore.calendar_select); 
+});
+
 
 const labelClasses = (value) => {
   const classes = computed(() => {
@@ -148,16 +160,18 @@ const submitForm = () => {
     subgroup: selectSub.value,
     year: selectYear.value
   }
-  setOptions(opt)
+  calendarStore.setOptions(opt)
 }
 </script>
 
 <style scoped lang="css">
 .form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 400px;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .form__div {
@@ -174,19 +188,19 @@ const submitForm = () => {
   cursor: pointer;
 }
 
-.form__div select:hover {
-}
-
 .form__div-button {
   padding: 1em;
   display: flex;
   justify-content: center;
 }
 
-.section__div-radio {
+
+.flexible__section {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
 
 .section__div-radio label {
