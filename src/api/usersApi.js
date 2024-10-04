@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
- import { API_BASE_URL } from './baseApi.js'
+import { API_BASE_URL } from './baseApi.js'
 
 export default class UsersApi {
   static getAllUsers = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/users`, {
+      const response = await fetch(`${API_BASE_URL}/api/users`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
@@ -25,19 +25,38 @@ export default class UsersApi {
     }
   }
 
-//   static getUser = async (query) => {
+  //   static getUser = async (query) => {
 
-//   }
+  //   }
 
-//   static insertUser = () => {
+  static insertUser = async (user) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/users`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'aplication/json'
+        },
+        body: JSON.stringify(user)
+      })
 
-//   }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
 
-//   static deleteUser = (id) => {
+      return response.json()
+    } catch (error) {
+      console.error('Error:', error)
+      throw error
+    }
+  }
 
-//   }
+  //   static deleteUser = (id) => {
 
-//   static updateUser = (id, query) => {
+  //   }
 
-//   }
+  //   static updateUser = (id, query) => {
+
+  //   }
 }

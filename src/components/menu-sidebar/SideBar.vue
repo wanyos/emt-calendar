@@ -56,8 +56,10 @@ const objComponents = {
 const getComponents = computed(() => objComponents[route.name])
 
 const getDepartures = async () => {
+  // eslint-disable-next-line no-undef
   const token = $cookies.get('usertoken')
    const dp = await DeparturesApi.getAllDepartures(token);
+   // eslint-disable-next-line no-undef
    console.log('res', dp);
 }
 

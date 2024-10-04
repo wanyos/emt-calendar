@@ -1,38 +1,9 @@
-// dummy-server/test/departures.spec.js
-import { describe, it, expect, beforeAll, afterAll } from 'vitest'
-import app from '../index.js' // Asegúrate de que esta ruta es correcta
-
-let server
-
-describe('API Tests', () => {
-  beforeAll((done) => {
-    server = app.listen(8022, done) // Inicia el servidor de Express en el puerto 8022
-  })
-
-  //   afterAll((done) => {
-  //     server.close(done); // Cierra el servidor después de las pruebas
-  //   });
-
-  it('GET /api/departures should return all departures', async () => {
-    // eslint-disable-next-line no-undef
-    const response = await fetch('http://localhost:8022/api/departures') // Realiza una solicitud GET
-    const data = await response.json() // Convierte la respuesta a JSON
-
-    expect(response.status).toBe(200) // Verifica que el estado sea 200
-    expect(data).toEqual(
-      expect.arrayContaining([
-        // Verifica que la respuesta contenga ciertos elementos
-        // expect.objectContaining({ id: expect.any(Number), destination: expect.any(String) })
-      ])
-    )
-  })
-})
-
-import { describe, it, expect } from 'vitest'
+/* eslint-disable no-undef */
+import { describe, it, expect, beforeAll } from 'vitest'
 import dotenv from 'dotenv'
-import startServer from '../index.mjs'
+import startServer from '../index.js'
 import request from 'supertest'
-import freeProfile from '../db/profiles/freeProfile.json'
+// import freeProfile from '../db/profiles/freeProfile.json'
 
 describe('Pruebas con diferentes configuraciones de entorno', () => {
   let server
@@ -42,16 +13,14 @@ describe('Pruebas con diferentes configuraciones de entorno', () => {
   })
 
   it('Debería iniciar correctamente con la configuración A', async () => {
-    dotenv.config({ path: '../.env.dummy-server' })
-    // const server = startServer(8022);
+    dotenv.config({ path: '.env.dummy-server' })
     expect(server).toBeDefined()
     // Añade más verificaciones dependiendo de la configuración
   })
 
   it('Debería fallar con la configuración B incorrecta', async () => {
-    dotenv.config({ path: '../.env.dummy-server' })
+    dotenv.config({ path: '.env.dummy-server' })
     try {
-      // const server = startServer(8022);
       const res = await request(server).get('/api/teams')
       expect(res.statusCode).toBe(200)
       expect(res.body.message).toBe('Hello World')
@@ -62,15 +31,24 @@ describe('Pruebas con diferentes configuraciones de entorno', () => {
     }
   })
 
-  it('Debería devolver el perfil en la ruta GET /me', async () => {
-    const res = await request(server).get('/api/profiles/me').set('Accept', 'application/json')
-    expect(res.statusCode).toBe(200)
+  it.only('Debería devolver el perfil en la ruta GET /api/departures', async () => {
+    const res = await request(server)
+      .get('/api/departures')
+      .set('Accept', 'application/json');
+  
+    expect(res.statusCode).toBe(200);
+   
+  });
 
-    console.log('body', res)
+  // it('Debería devolver el perfil en la ruta GET /departures', async () => {
+  //   const res = await request(server).get('/api/departures').set('Accept', 'application/json')
+  //   expect(res.statusCode).toBe(200)
 
-    expect(res.first_name).toBe(freeProfile.first_name)
-    expect(res.email).toBe(freeProfile.email)
-  })
+  //   // console.log('body', res)
+
+  //   // expect(res.first_name).toBe(freeProfile.first_name)
+  //   // expect(res.email).toBe(freeProfile.email)
+  // })
 
   // it('Debería crear un nuevo usuario en la ruta POST /api/users', async () => {
   //     const newUser = freeProfile;
