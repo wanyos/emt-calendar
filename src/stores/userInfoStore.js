@@ -36,7 +36,6 @@ export const useUserInfo = defineStore('useUserInfo', () => {
         $cookies.set('usertoken', usr.accessToken)
         $cookies.set('userid', user.id)
         $cookies.set('useremail', user.email)
-
       })
       .catch((error) => {
         isErrorLogin.value = true
@@ -87,8 +86,7 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     try {
       await signInWithPopup(auth, provider).then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result)
-        console.log('crdential', credential);
-        const token = credential.accessToken
+        const token = credential.idToken
         user.id = result.user.uid
         user.email = result.user.email
 
@@ -107,7 +105,8 @@ export const useUserInfo = defineStore('useUserInfo', () => {
     try {
       await signInWithPopup(auth, microsoftProvider).then((result) => {
         const credential = OAuthProvider.credentialFromResult(result)
-        const token = credential.accessToken
+
+        const token = credential.idToken
         user.id = result.user.uid
         user.email = result.user.email
 

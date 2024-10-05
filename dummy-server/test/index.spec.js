@@ -31,14 +31,11 @@ describe('Pruebas con diferentes configuraciones de entorno', () => {
     }
   })
 
-  it.only('Debería devolver el perfil en la ruta GET /api/departures', async () => {
-    const res = await request(server)
-      .get('/api/departures')
-      .set('Accept', 'application/json');
-  
-    expect(res.statusCode).toBe(200);
-   
-  });
+  it('Debería devolver el perfil en la ruta GET /api/departures', async () => {
+    const res = await request(server).get('/api/departures').set('Accept', 'application/json')
+
+    expect(res.statusCode).toBe(200)
+  })
 
   // it('Debería devolver el perfil en la ruta GET /departures', async () => {
   //   const res = await request(server).get('/api/departures').set('Accept', 'application/json')
