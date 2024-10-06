@@ -4,11 +4,14 @@ import mysql from 'mysql2/promise'
 
 dotenv.config({ path: '.env.dummy-server' })
 
+const isTestEnv = process.env.NODE_ENV === 'test'
+const dbName = isTestEnv ? process.env.DB_NAME_TEST : process.env.DB_NAME
+
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  database: dbName,
   port: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
@@ -21,19 +24,17 @@ const pool = mysql.createPool({
 
 // Función para verificar la conexión
 const checkConnection = async () => {
-    try {
-      const connection = await pool.getConnection();
-      console.log('Database connection is active');
-      connection.release();
-    } catch (error) {
-      console.error('Error checking database connection:', error);
-    }
-  };
+  try {
+    const connection = await pool.getConnection()
+    console.log('Database connection is active')
+    connection.release()
+  } catch (error) {
+    console.error('Error checking database connection:', error)
+  }
+}
 
-setInterval(checkConnection, 5 * 60 * 1000);
-checkConnection();
-
-
+setInterval(checkConnection, 5 * 60 * 1000)
+checkConnection()
 
 // const insertUser = async () => {
 //     try {
@@ -46,24 +47,23 @@ checkConnection();
 // insertUser();
 
 export const getAll = async (table) => {
-    try {
-        const [rows] = await pool.query(`SELECT * FROM ${table}`);
-        // console.log(rows[0])
-        return rows;
-    } catch(err) {
-        console.log(err);
-    }
+  try {
+    const [rows] = await pool.query(`SELECT * FROM ${table}`)
+    // console.log(rows[0])
+    return rows
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export const closePool = async () => {
-    try {
-      await pool.end();
-      console.log('Database pool closed');
-    } catch (error) {
-      console.error('Error closing database pool:', error);
-    }
-  };
-
+  try {
+    await pool.end()
+    console.log('Database pool closed')
+  } catch (error) {
+    console.error('Error closing database pool:', error)
+  }
+}
 
 // getAll('departures');
 
@@ -97,3 +97,4 @@ export const closePool = async () => {
 //   }
 // }
 
+export { pool, checkConnection }

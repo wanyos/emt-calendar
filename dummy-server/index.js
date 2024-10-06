@@ -13,11 +13,9 @@ import path from 'path'
 import { OAuth2Client } from 'google-auth-library'
 
 // microsoft
-// const CLIENT_ID_MICROSOFT = '0da56db7-19e0-4588-b559-6cd28b5cfcf2'
 const CLIENT_ID_MICROSOFT = process.env.CLIENT_ID_MICROSOFT
 
 // google
-// const CLIENT_ID_GOOGLE = '223212964810-385v061gqvb5i7e584irviklsl9e3qid.apps.googleusercontent.com'
 const CLIENT_ID_GOOGLE = process.env.CLIENT_ID_GOOGLE
 const client = new OAuth2Client(CLIENT_ID_GOOGLE)
 
@@ -60,7 +58,6 @@ if (process.env.NODE_ENV === 'test') {
 
 const adminApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  // project_id: 'fir-login-4f13b'
   project_id: process.env.PROJECT_ID_FIREBASE
 })
 
